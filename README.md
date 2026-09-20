@@ -64,6 +64,12 @@ sudo ./build/crypto-monitor -o events.jsonl -S stats.json -d 60
 (see `config/tuning.yaml`). The library paths probed by default are defined in
 `include/crypto_api.h`.
 
+The randomness-correlation window is fixed at 1 s in `apply_random_corr()`
+(`src/bpf/crypto_monitor.bpf.c`); it is not a command-line option. In all
+experiments the gap between an anchored crypto event and its preceding RNG
+event stayed below 40 ms, so any window from 40 ms to 1 s gives identical
+anchoring. Change the constant and rebuild to experiment with other values.
+
 ## Layout
 
 | Path | Contents |
