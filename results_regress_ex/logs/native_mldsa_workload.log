@@ -1,0 +1,3 @@
+[workload] native ML-DSA-44 keygen+sign+verify OK (siglen=2420)
+[workload] native ML-DSA-65 keygen+sign+verify OK (siglen=3309)
+[workload] native ML-DSA-87 keygen+sign+verify OK (siglen=4627)

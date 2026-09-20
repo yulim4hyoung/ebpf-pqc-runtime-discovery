@@ -1,0 +1,67 @@
+synced to /home/yulimH/pqc_run: build config include LICENSE Makefile README.md requirements.txt results scripts src third_party workloads 
+=== [1/3] run_native_mlkem.sh 11:19:52 ===
+done.
+OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.5.5 27 Jan 2026)
+[workload] native ML-KEM-512 keygen+encaps+decaps OK (ct=768 ss=32)
+[workload] native ML-KEM-768 keygen+encaps+decaps OK (ct=1088 ss=32)
+[workload] native ML-KEM-1024 keygen+encaps+decaps OK (ct=1568 ss=32)
+[workload] liboqs ML-KEM-768 keygen+encaps+decaps OK
+# Native OpenSSL 3.5 ML-KEM vs liboqs detection
+
+| Case | Crypto ev | RNG ev | PQC ev | Anchored PQC | Max conf | APIs |
+|---|---:|---:|---:|---:|---:|---|
+| native_evp | 15 | 8 | 15 | 15 | 1.0 | EVP_PKEY_decapsulate×6, EVP_PKEY_encapsulate×6, EVP_PKEY_keygen×3 |
+| native_cli | 1 | 3 | 1 | 1 | 1.0 | EVP_PKEY_keygen×1 |
+| liboqs | 3 | 6 | 3 | 3 | 1.0 | OQS_KEM_decaps×1, OQS_KEM_encaps×1, OQS_KEM_keypair×1 |
+
+- **native_evp** algorithms attributed: {'ML-KEM-512': 5, 'ML-KEM-768': 5, 'ML-KEM-1024': 5}
+- **native_cli** algorithms attributed: {'ML-KEM-768': 1}
+- **liboqs** algorithms attributed: {'ML-KEM-768': 3}
+Results: /home/yulimH/pqc_run/results/native-mlkem/
+rc=0
+=== [2/3] run_tls_handshake.sh 11:20:42 ===
+done.
+OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.5.5 27 Jan 2026)
+# Real TLS 1.3 handshake: PQC hybrid group vs classical group
+
+| Case | Crypto ev | RNG ev | PQC ev | Anchored PQC | Max conf | APIs |
+|---|---:|---:|---:|---:|---:|---|
+| pqc_kem | 11 | 27 | 7 | 7 | 1.0 | EVP_DigestSignInit_ex×2, EVP_DigestVerifyInit_ex×1, EVP_PKEY_decapsulate×3, EVP_PKEY_encapsulate×3, EVP_PKEY_keygen×2 |
+| classical_x25519 | 5 | 26 | 0 | 0 | 1.0 | EVP_DigestSignInit_ex×2, EVP_DigestVerifyInit_ex×1, EVP_PKEY_keygen×2 |
+
+- **pqc_kem** algorithms attributed: {'X25519MLKEM768': 5, 'ML-KEM-768': 2, 'X25519': 1}
+- **classical_x25519** algorithms attributed: {'X25519': 2}
+
+> Server and client both run as "openssl" and are aggregated together within each case; the two cases (pqc_kem vs classical_x25519) are separate monitored sessions, so there is no cross-contamination between them.
+Results: /home/yulimH/pqc_run/results/tls-handshake/
+rc=0
+=== [3/3] run_a10a11_validation.sh -> results_regress 11:21:08 ===
+done.
+OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.5.5 27 Jan 2026)
+[case] native_evp done
+[case] native_cli done
+[case] native_mldsa done
+[case] liboqs_mlkem done
+[case] liboqs_mldsa done
+[case] curl_https done
+[case] tls_pqc_kem done
+[case] tls_classical_x25519 done
+# A10/A11 validation (2026-09-20 monitor) vs paper baseline
+
+Baseline = the logs under `results/` that the paper's numbers come from (unchanged).
+
+| Case | Crypto ev (new/base) | Named (new/base) | Anchored (new/base) | Family new | Family base | Conf new | Conf base |
+|---|---:|---:|---:|---|---|---|---|
+| native_evp | 15/15 | 15/15 | 15/15 | {'PQC': 15} | {'PQC': 15} | {'1.0': 15} | {'1.0': 15} |
+| native_cli | 1/1 | 1/1 | 1/1 | {'PQC': 1} | {'PQC': 1} | {'1.0': 1} | {'1.0': 1} |
+| native_mldsa | 12/12 | 12/12 | 12/12 | {'PQC': 12} | {'PQC': 12} | {'1.0': 12} | {'1.0': 12} |
+| liboqs_mlkem | 3/3 | 3/3 | 3/3 | {'PQC': 3} | {'PQC': 3} | {'1.0': 3} | {'1.0': 3} |
+| liboqs_mldsa | 3/3 | 3/3 | 3/3 | {'PQC': 3} | {'PQC': 3} | {'1.0': 3} | {'1.0': 3} |
+| curl_https | 9/0 | 5/0 | 9/0 | {'PQC': 4, 'classical': 1, 'unknown': 4} | {} | {'1.0': 5, '0.5': 4} | {} |
+| tls_pqc_kem | 11/11 | 8/8 | 11/11 | {'PQC': 7, 'unknown': 3, 'classical': 1} | {'PQC': 7, 'unknown': 3, 'classical': 1} | {'1.0': 8, '0.5': 3} | {'1.0': 8, '0.5': 3} |
+| tls_classical_x25519 | 5/5 | 2/2 | 5/5 | {'classical': 2, 'unknown': 3} | {'classical': 2, 'unknown': 3} | {'1.0': 2, '0.5': 3} | {'1.0': 2, '0.5': 3} |
+
+written /work/results_regress/summary.md
+Results: /home/yulimH/pqc_run/results_regress/summary.md
+rc=0
+=== DONE 11:22:15 ===

@@ -1,0 +1,3 @@
+$ /tmp/mldsa_workload
+[workload] liboqs ML-DSA-65 keypair+sign+verify OK (siglen=3309)
+rc=0

@@ -1,0 +1,9 @@
+# Step 1a: UNMODIFIED workload (EVP_PKEY_sign_init + EVP_PKEY_sign, pre-hash path) 2026-09-20T10:35:11Z
+# OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.5.5 27 Jan 2026)
+rc=1
+# Step 1b: same call sequence with ERR_print_errors (diag build, not in repo)
+[step] keygen_init  -> 1
+[step] keygen       -> 1
+[step] sign_init    -> -2
+C0AEC162FB7E0000:error:030000ED:digital envelope routines:evp_pkey_signature_init:provider signature not supported:../crypto/evp/signature.c:791:ML-DSA-65 sign_init:
+rc=1

@@ -1,0 +1,59 @@
+{
+  "native_evp": {
+    "events_total": 20,
+    "crypto_events": 12,
+    "random_events": 8,
+    "by_api": {
+      "EVP_PKEY_keygen": 3,
+      "EVP_PKEY_sign": 6,
+      "EVP_PKEY_verify": 3
+    },
+    "by_algorithm": {
+      "ML-DSA-44": 4,
+      "ML-DSA-65": 4,
+      "ML-DSA-87": 4
+    },
+    "pqc_events": 12,
+    "anchored_events": 12,
+    "anchored_pqc": 12,
+    "max_confidence": 1.0,
+    "detection_latency_us_median": 27
+  },
+  "native_cli": {
+    "events_total": 10,
+    "crypto_events": 3,
+    "random_events": 7,
+    "by_api": {
+      "EVP_PKEY_keygen": 1,
+      "EVP_DigestSignInit_ex": 1,
+      "EVP_DigestVerifyInit_ex": 1
+    },
+    "by_algorithm": {
+      "ML-DSA-65": 1,
+      "": 2
+    },
+    "pqc_events": 1,
+    "anchored_events": 3,
+    "anchored_pqc": 1,
+    "max_confidence": 1.0,
+    "detection_latency_us_median": 36
+  },
+  "liboqs": {
+    "events_total": 9,
+    "crypto_events": 3,
+    "random_events": 6,
+    "by_api": {
+      "OQS_SIG_keypair": 1,
+      "OQS_SIG_sign": 1,
+      "OQS_SIG_verify": 1
+    },
+    "by_algorithm": {
+      "ML-DSA-65": 3
+    },
+    "pqc_events": 3,
+    "anchored_events": 3,
+    "anchored_pqc": 3,
+    "max_confidence": 1.0,
+    "detection_latency_us_median": 31
+  }
+}

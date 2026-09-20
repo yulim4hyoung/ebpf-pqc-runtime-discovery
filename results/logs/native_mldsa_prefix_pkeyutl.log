@@ -1,0 +1,11 @@
+# Step 1c: openssl CLI (Ubuntu openssl app + host OpenSSL 3.5 libcrypto overlay) 2026-09-20T10:35:11Z
+genpkey rc=0
+Error signing raw input data
+Public Key operation error
+40477176D9790000:error:030000ED:digital envelope routines:EVP_DigestSignUpdate:provider signature not supported:../crypto/evp/m_sigver.c:422:ML-DSA-65 digest_sign_update:
+pkeyutl -sign -rawin rc=1
+sig size: 0 bytes
+Error verifying raw input data
+400766FD47770000:error:030000ED:digital envelope routines:EVP_DigestVerifyUpdate:provider signature not supported:../crypto/evp/m_sigver.c:468:ML-DSA-65 digest_verify_update:
+Signature Verification Failure
+pkeyutl -verify -rawin rc=1

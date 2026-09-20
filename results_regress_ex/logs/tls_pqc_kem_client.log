@@ -1,0 +1,54 @@
+Can't use SSL_get_servername
+depth=0 CN = localhost
+verify error:num=18:self-signed certificate
+verify return:1
+depth=0 CN = localhost
+verify return:1
+CONNECTED(00000003)
+---
+Certificate chain
+ 0 s:CN = localhost
+   i:CN = localhost
+   a:PKEY: rsaEncryption, 2048 (bit); sigalg: RSA-SHA256
+   v:NotBefore: Sep 20 11:22:03 2026 GMT; NotAfter: Sep 21 11:22:03 2026 GMT
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIDCTCCAfGgAwIBAgIUFgs+Vb8OHmq7NOpfODDUcdQTzw0wDQYJKoZIhvcNAQEL
+BQAwFDESMBAGA1UEAwwJbG9jYWxob3N0MB4XDTI2MDkyMDExMjIwM1oXDTI2MDky
+MTExMjIwM1owFDESMBAGA1UEAwwJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEF
+AAOCAQ8AMIIBCgKCAQEA25rmC9tx7kk+98aXctldjDYfhdeQytj9EZ4dBwRdWhsg
+yOZ1sr/d1GItqtY/ns7Tp2xlRR1kLkwgxtIQH297cbmgDoc9rwa+HILrza5ZAUL7
+HEfP8i1JVEcHbl7eQeh1jldLlndVkjTHHVBlCYzVZfD2dYzgvOzqHML10o/X2xsC
+M7GryBD615AGpCjZ4aGzBXzpD8faK68FCpkOIXSrTPd4XEeKfzmO5A787qTTavJG
+mRX7OjqrHDUt1CZlV8pmOGNPQ4BN2z2gsUoBNe011G3wPpYxXL+rpGxtjw3tqBsP
+tvWUytKSMgkLUptayHWa0dyFVTGYv8VK1LiWyuzogwIDAQABo1MwUTAdBgNVHQ4E
+FgQUUi8gvSWcyxzT2PB5ixdhCrJyOgowHwYDVR0jBBgwFoAUUi8gvSWcyxzT2PB5
+ixdhCrJyOgowDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEALw6R
+DdBa17w2Id79+n4ouHxQkpCg7+Ns2wsBQaAXVwEQQNI9PsNYSmqnZ47Dfdu/mmxI
+YDFsqGvg3zoqB4adZFKB6mQyuAzUrcHE/UcpjflivRhMgDmej8qAFKLLmeg1zG6L
+8ITkFETAYf30lu6eHD1m/TGHVc89Qj6PqxezXHyeE1N0VXHj55dHlYtJ0rhdmW5T
+nr3DaMRavFDTPsi6Qfpr10qqOBycWr7aWu7sKQ9RxZ8zCOUFxcohKVTgPAs/ncN6
+7/3/G9Wvm7FxL7L8Wb/CytiE10p2QSFzNpvqnRv3d/z0AFCDgrkBQCNnLaerv91C
++lz+/KzXhCsbh/OHXw==
+-----END CERTIFICATE-----
+subject=CN = localhost
+issuer=CN = localhost
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+---
+SSL handshake has read 2425 bytes and written 1555 bytes
+Verification error: self-signed certificate
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 18 (self-signed certificate)
+---
+DONE
