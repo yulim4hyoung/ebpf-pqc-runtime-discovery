@@ -1,4 +1,4 @@
-# runtime-pqc-discovery
+# ebpf-crypto-monitor
 
 Runtime discovery of cryptographic operations on Linux with eBPF, using
 randomness as a temporal anchor.
@@ -15,7 +15,7 @@ measurement scripts are automated end to end, so every number reported in the
 paper can be regenerated from the measurement scripts and the summary logs kept
 in this repository.
 
-This is the artifact for the paper *Runtime detection of cryptographic
+This repository (formerly `runtime-pqc-discovery`) is the artifact for the paper *Runtime detection of cryptographic
 operations on Linux with eBPF and randomness anchors* (2026). The tag
 `paper-2026-09` marks the state referenced from the paper.
 
