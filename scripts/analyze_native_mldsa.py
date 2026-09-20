@@ -92,10 +92,18 @@ def main() -> None:
         lines.append(f"- **{case}** algorithms attributed: {algs or 'none'}")
     lines.append("")
     lines.append(
-        "> Note: sign/verify events are expected to carry no algorithm name "
-        "(same EVP_PKEY_CTX_new_from_pkey gap as ML-KEM encaps/decaps, "
-        "Sect. 4.6) until task ④ closes it. Only the keygen event should "
-        "show a non-empty algorithm and confidence 1.0."
+        "> Expected (2026-09-20): every case shows keygen, sign and verify. "
+        "native_evp signs through EVP_PKEY_sign_message_init + EVP_PKEY_sign "
+        "(the size query and the signature are two EVP_PKEY_sign calls, so sign "
+        "counts twice per parameter set, as encapsulation does in the ML-KEM "
+        "experiment); its sign/verify contexts inherit the generated key's name "
+        "(A10), so all events are named and anchored at confidence 1.0. "
+        "native_cli signs through the OpenSSL 3.5 openssl app (one-shot "
+        "EVP_DigestSignInit_ex / EVP_DigestVerifyInit_ex): those two events are "
+        "detected but carry no name, because pkeyutl decodes its key from the PEM "
+        "file written by a separate genpkey process, and keys decoded from "
+        "encodings are outside the name producers (the open gap named in the "
+        "paper's future work)."
     )
     (OUT / "summary.md").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))

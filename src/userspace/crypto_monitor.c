@@ -305,6 +305,10 @@ static int attach_all(struct bpf_object *obj)
 		{ "uprobe_evp_pkey_verify", "EVP_PKEY_verify", false, P_CRYPTO },
 		{ "uprobe_evp_digestsign_init", "EVP_DigestSignInit", false, P_CRYPTO },
 		{ "uprobe_evp_digestverify_init", "EVP_DigestVerifyInit", false, P_CRYPTO },
+		/* 2026-09-20: _ex variants used by the openssl apps and libssl; the
+		 * only signature-side symbol that fires for one-shot ML-DSA. */
+		{ "uprobe_evp_digestsign_init_ex", "EVP_DigestSignInit_ex", false, P_CRYPTO },
+		{ "uprobe_evp_digestverify_init_ex", "EVP_DigestVerifyInit_ex", false, P_CRYPTO },
 		{ "uprobe_rand_bytes", "RAND_bytes", false, P_CRYPTO },
 		{ "uprobe_rand_bytes_ex", "RAND_bytes_ex", false, P_CRYPTO },
 		{ "uprobe_rand_priv_bytes", "RAND_priv_bytes", false, P_CRYPTO },

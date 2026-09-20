@@ -84,6 +84,7 @@ anchoring. Change the constant and rebuild to experiment with other values.
 | `results/` | measurements the paper's numbers come from (see below) |
 | `results_vm_native/` | re-run of the real-world study on a native (non-WSL2) kernel, Sect. 5 |
 | `results_a10a11/` | validation of algorithm-name propagation and the keypair uretprobes, `summary.md` |
+| `results_regress_ex/` | regression run of the 2026-09-20 monitor after hooking the extended signing/verification initialisers (`EVP_DigestSignInit_ex` / `EVP_DigestVerifyInit_ex`): native ML-KEM, ML-DSA, liboqs, curl and TLS 1.3 cases; `summary.md` compares with the run-tree baseline, `logs/regress_driver.log` is the driver log |
 
 ## Reproducing the paper's numbers
 
@@ -95,7 +96,7 @@ All experiment drivers live in `scripts/`. The ones used for the paper are:
 | `run_tuning_benchmarks.py` | the same rounds without Docker (run inside a privileged container or as root) |
 | `run_qed_realworld.sh` | static-vs-runtime comparison on the real-world applications of the QED dataset (`QED_ROOT` must point at a checkout of <https://github.com/norrathep/qed>) |
 | `run_randomness_eval_docker.sh` | randomness-detector ablation (`results/randomness-eval/`) |
-| `run_native_mlkem.sh`, `run_native_mldsa.sh` | OpenSSL 3.5 native ML-KEM / ML-DSA versus liboqs |
+| `run_native_mlkem.sh`, `run_native_mldsa.sh` | OpenSSL 3.5 native ML-KEM / ML-DSA versus liboqs. Both bind-mount the host OpenSSL 3.5 `libcrypto`/`libssl` over the container copies; `run_native_mldsa.sh` additionally needs the host 3.5 headers and `openssl` command, because ML-DSA signs through the 3.5 message-signing API (`EVP_PKEY_sign_message_init`) and the container 3.0 `openssl` cannot drive it (see the script header) |
 | `run_tls_handshake.sh` | TLS 1.3 handshake, X25519 versus hybrid ML-KEM |
 | `run_a10a11_validation.sh` | validation of the later monitor changes, writes to `results_a10a11/` only |
 | `analyze.py`, `aggregate_tuning.py`, `plot.py` | summary tables and figures from the stats files |

@@ -31,6 +31,8 @@ char LICENSE[] SEC("license") = "Dual BSD/GPL";
  * Consumers
  *   EVP_PKEY_{keygen,encapsulate,decapsulate,sign,verify}(ctx, ...)  via ctx
  *   EVP_Digest{Sign,Verify}Init(mdctx, pctx, md, e, pkey)             via pkey
+ *   EVP_Digest{Sign,Verify}Init_ex(mdctx, pctx, mdname, libctx, propq,
+ *                                  pkey, params)                     via pkey (arg 6)
  * Cleanup (prevents a freed address from handing its stale name to a new
  * object at the same address)
  *   EVP_PKEY_CTX_free(ctx), OQS_KEM_free(kem), OQS_SIG_free(sig)
@@ -533,6 +535,28 @@ int uprobe_evp_digestverify_init(struct pt_regs *ctx)
 {
 	return emit_crypto("EVP_DigestVerifyInit", LIBCRYPTO_PATH, OP_VERIFY, 0,
 			   PT_REGS_PARM5(ctx));
+}
+
+/* 2026-09-20: the _ex variants. OpenSSL 3 applications (the openssl command,
+ * libssl) call EVP_DigestSignInit_ex / EVP_DigestVerifyInit_ex rather than
+ * the five-argument forms; for ML-DSA, whose provider signs whole messages
+ * in one shot, this init call is the only signature-side symbol that fires
+ * (EVP_DigestSign() goes straight to the provider). The key is the sixth
+ * argument. Both variants are siblings that call the internal
+ * do_sigver_init(), so hooking both never fires twice for one call. */
+SEC("uprobe")
+int uprobe_evp_digestsign_init_ex(struct pt_regs *ctx)
+{
+	/* EVP_DigestSignInit_ex(mdctx, pctx, mdname, libctx, propq, pkey, params) */
+	return emit_crypto("EVP_DigestSignInit_ex", LIBCRYPTO_PATH, OP_SIGN, 0,
+			   PT_REGS_PARM6(ctx));
+}
+
+SEC("uprobe")
+int uprobe_evp_digestverify_init_ex(struct pt_regs *ctx)
+{
+	return emit_crypto("EVP_DigestVerifyInit_ex", LIBCRYPTO_PATH, OP_VERIFY, 0,
+			   PT_REGS_PARM6(ctx));
 }
 
 /* ------------------------------------------------------------------ */

@@ -23,6 +23,8 @@ docker run --rm --privileged --pid=host \
   -v /usr/lib/x86_64-linux-gnu/libssl.so.3:/hostssl/libssl.so.3:ro \
   -v /usr/local/lib:/usr/local/lib:ro \
   -v /usr/local/include:/usr/local/include:ro \
+  -v "${HOST_OPENSSL_INCLUDE:-/usr/include/openssl}:/hostssl/include/openssl:ro" \
+  -v "${HOST_OPENSSL_INCLUDE_ARCH:-/usr/include/x86_64-linux-gnu/openssl}:/hostssl/include-arch/openssl:ro" \
   -v /sys/kernel/btf:/sys/kernel/btf:ro \
   -v /sys/fs/bpf:/sys/fs/bpf \
   "${TRACEFS_MOUNT[@]}" \
@@ -41,7 +43,9 @@ docker run --rm --privileged --pid=host \
     mkdir -p "$OUT" "$OUT/logs"
 
     gcc -Wall -O2 -o /tmp/mlkem-native workloads/openssl_native/mlkem_native_workload.c -lcrypto
-    gcc -Wall -O2 -o /tmp/mldsa-native workloads/openssl_native/mldsa_native_workload.c -lcrypto
+    # 2026-09-20: the ML-DSA workload uses the 3.5 message-signing API -> host 3.5 headers
+    gcc -Wall -O2 -I/hostssl/include -I/hostssl/include-arch \
+      -o /tmp/mldsa-native workloads/openssl_native/mldsa_native_workload.c -lcrypto
     gcc -Wall -O2 -o /tmp/mlkem_workload workloads/liboqs/mlkem_workload.c \
       -I/usr/local/include -L/usr/local/lib -loqs -Wl,-rpath,/usr/local/lib
     gcc -Wall -O2 -o /tmp/mldsa_workload workloads/liboqs/mldsa_workload.c \
