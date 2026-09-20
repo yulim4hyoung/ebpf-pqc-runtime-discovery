@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-08-28T15:17:37+09:00",
+  "uname": "Linux wsl2-host 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 GNU/Linux",
+  "openssl": "OpenSSL 3.5.5 27 Jan 2026 (Library: OpenSSL 3.5.5 27 Jan 2026)",
+  "clang": "Debian clang version 21.1.8 (7+b1)",
+  "bpftool": "bpftool v7.4.0",
+  "btf": true,
+  "liboqs": true,
+  "uid": 1000,
+  "kernel_config": {
+    "CONFIG_BPF": "y",
+    "CONFIG_BPF_SYSCALL": "y",
+    "CONFIG_UPROBE_EVENTS": "y",
+    "CONFIG_KPROBE_EVENTS": "y",
+    "CONFIG_BPF_JIT": "y",
+    "CONFIG_BPF": "end"
+  }
+}

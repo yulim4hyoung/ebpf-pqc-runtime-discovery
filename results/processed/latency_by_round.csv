@@ -1,0 +1,5 @@
+round,latency_median_us,latency_p95_us,latency_p99_us,latency_mean_us,events_total
+round1_baseline,28,39,51,26,18965
+round2_fast_poll,28,35,48,24,20452
+round3_aggressive_poll,28,36,51,25,19628
+round4_minimal_output,28,35,48,24,20383

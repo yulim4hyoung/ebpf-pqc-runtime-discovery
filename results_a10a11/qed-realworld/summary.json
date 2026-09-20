@@ -1,0 +1,350 @@
+{
+  "reference": "https://github.com/norrathep/qed",
+  "method": "process-filtered; crypto=event_type1; random is indicator only",
+  "apps_tested": 9,
+  "results": [
+    {
+      "id": "curl-https",
+      "category": "network",
+      "process_filter": "curl",
+      "run_ok": true,
+      "run_error": "",
+      "static": {
+        "exists": true,
+        "crypto_libs": [
+          "libssl.so.3 => /lib/x86_64-linux-gnu/libssl.so.3 (0x00007ad1668a3000)",
+          "libcrypto.so.3 => /lib/x86_64-linux-gnu/libcrypto.so.3 (0x00007ad16638f000)",
+          "libgnutls.so.30 => /lib/x86_64-linux-gnu/libgnutls.so.30 (0x00007ad165e59000)"
+        ],
+        "qv_libs": [
+          "libcrypto",
+          "libgnutls",
+          "libssl"
+        ],
+        "static_qv": true
+      },
+      "runtime_crypto_detected": true,
+      "runtime_random_detected": true,
+      "randomness_correlated_crypto": true,
+      "matched_crypto_count": 4,
+      "matched_random_count": 12,
+      "contaminating_events": 0,
+      "apis_matched": [
+        "EVP_DigestVerifyInit",
+        "EVP_PKEY_keygen",
+        "RAND_bytes_ex",
+        "RAND_priv_bytes_ex",
+        "getrandom"
+      ],
+      "algorithms_matched": [
+        "X25519"
+      ],
+      "expected_crypto": true,
+      "expected_random": null,
+      "crypto_match": true,
+      "random_match": true,
+      "contaminated": false,
+      "verdict": "PASS",
+      "notes": "OpenSSL/GnuTLS via libssl.so.3"
+    },
+    {
+      "id": "wget-https",
+      "category": "network",
+      "process_filter": "wget",
+      "run_ok": true,
+      "run_error": "",
+      "static": {
+        "exists": true,
+        "crypto_libs": [
+          "libssl.so.1.1 => /lib/x86_64-linux-gnu/libssl.so.1.1 (0x000074051e5f3000)",
+          "libcrypto.so.1.1 => /lib/x86_64-linux-gnu/libcrypto.so.1.1 (0x000074051e31d000)"
+        ],
+        "qv_libs": [
+          "libcrypto",
+          "libssl"
+        ],
+        "static_qv": true
+      },
+      "runtime_crypto_detected": true,
+      "runtime_random_detected": true,
+      "randomness_correlated_crypto": true,
+      "matched_crypto_count": 11,
+      "matched_random_count": 9,
+      "contaminating_events": 0,
+      "apis_matched": [
+        "EVP_DigestSignInit",
+        "EVP_DigestVerifyInit",
+        "EVP_PKEY_keygen",
+        "EVP_PKEY_verify",
+        "RAND_bytes",
+        "RAND_priv_bytes",
+        "getrandom"
+      ],
+      "algorithms_matched": [],
+      "expected_crypto": true,
+      "expected_random": null,
+      "crypto_match": true,
+      "random_match": true,
+      "contaminated": false,
+      "verdict": "PASS",
+      "notes": ""
+    },
+    {
+      "id": "ssh-version",
+      "category": "network",
+      "process_filter": "ssh",
+      "run_ok": true,
+      "run_error": "",
+      "static": {
+        "exists": true,
+        "crypto_libs": [
+          "libcrypto.so.1.1 => /lib/x86_64-linux-gnu/libcrypto.so.1.1 (0x00007caaac6b5000)"
+        ],
+        "qv_libs": [
+          "libcrypto"
+        ],
+        "static_qv": true
+      },
+      "runtime_crypto_detected": false,
+      "runtime_random_detected": true,
+      "randomness_correlated_crypto": false,
+      "matched_crypto_count": 0,
+      "matched_random_count": 3,
+      "contaminating_events": 0,
+      "apis_matched": [
+        "RAND_bytes",
+        "getrandom"
+      ],
+      "algorithms_matched": [],
+      "expected_crypto": false,
+      "expected_random": true,
+      "crypto_match": true,
+      "random_match": true,
+      "contaminated": false,
+      "verdict": "PASS",
+      "notes": "ssh -V may RAND_bytes on init; that is NOT a crypto operation"
+    },
+    {
+      "id": "md5sum",
+      "category": "coreutils",
+      "process_filter": "md5sum",
+      "run_ok": true,
+      "run_error": "",
+      "static": {
+        "exists": false,
+        "qv_libs": [],
+        "crypto_libs": [],
+        "static_qv": false
+      },
+      "runtime_crypto_detected": false,
+      "runtime_random_detected": true,
+      "randomness_correlated_crypto": false,
+      "matched_crypto_count": 0,
+      "matched_random_count": 1,
+      "contaminating_events": 0,
+      "apis_matched": [
+        "getrandom"
+      ],
+      "algorithms_matched": [],
+      "expected_crypto": false,
+      "expected_random": false,
+      "crypto_match": true,
+      "random_match": false,
+      "contaminated": false,
+      "verdict": "FAIL",
+      "notes": "Hash only, not QV per QED (symmetric hash)"
+    },
+    {
+      "id": "tpm2-getrandom",
+      "category": "tpm",
+      "process_filter": "tpm2_getrandom",
+      "run_ok": true,
+      "run_error": "",
+      "static": {
+        "exists": false,
+        "qv_libs": [],
+        "crypto_libs": [],
+        "static_qv": false
+      },
+      "runtime_crypto_detected": false,
+      "runtime_random_detected": true,
+      "randomness_correlated_crypto": false,
+      "matched_crypto_count": 0,
+      "matched_random_count": 4,
+      "contaminating_events": 0,
+      "apis_matched": [
+        "Esys_GetRandom",
+        "getrandom"
+      ],
+      "algorithms_matched": [],
+      "expected_crypto": false,
+      "expected_random": true,
+      "crypto_match": true,
+      "random_match": true,
+      "contaminated": false,
+      "verdict": "PASS",
+      "notes": "TPM GetRandom is randomness, not QV crypto primitive"
+    },
+    {
+      "id": "tpm2-createprimary-rsa",
+      "category": "tpm",
+      "process_filter": "tpm2_createprim",
+      "run_ok": true,
+      "run_error": "",
+      "static": {
+        "exists": false,
+        "qv_libs": [],
+        "crypto_libs": [],
+        "static_qv": false
+      },
+      "runtime_crypto_detected": true,
+      "runtime_random_detected": true,
+      "randomness_correlated_crypto": true,
+      "matched_crypto_count": 4,
+      "matched_random_count": 6,
+      "contaminating_events": 0,
+      "apis_matched": [
+        "EVP_DigestSignInit",
+        "Esys_CreatePrimary",
+        "RAND_bytes_ex",
+        "getrandom"
+      ],
+      "algorithms_matched": [
+        "HMAC"
+      ],
+      "expected_crypto": true,
+      "expected_random": null,
+      "crypto_match": true,
+      "random_match": true,
+      "contaminated": false,
+      "verdict": "PASS",
+      "notes": "RSA-2048 primary key in TPM (QV)"
+    },
+    {
+      "id": "qed-tpm2-getrandom",
+      "category": "tpm",
+      "process_filter": "tpm2_getrandom",
+      "run_ok": false,
+      "run_error": "'utf-8' codec can't decode byte 0xfa in position 2: invalid start byte",
+      "static": {
+        "exists": true,
+        "crypto_libs": [
+          "libtss2-esys.so.0 => /lib/x86_64-linux-gnu/libtss2-esys.so.0 (0x00007a0a4bddf000)",
+          "libtss2-mu.so.0 => /lib/x86_64-linux-gnu/libtss2-mu.so.0 (0x00007a0a4bd9a000)",
+          "libcrypto.so.1.1 => /lib/x86_64-linux-gnu/libcrypto.so.1.1 (0x00007a0a4bac4000)",
+          "libtss2-tctildr.so.0 => /lib/x86_64-linux-gnu/libtss2-tctildr.so.0 (0x00007a0a4baba000)",
+          "libtss2-rc.so.0 => /lib/x86_64-linux-gnu/libtss2-rc.so.0 (0x00007a0a4bab0000)",
+          "libcrypto.so.3 => /lib/x86_64-linux-gnu/libcrypto.so.3 (0x00007a0a4b387000)",
+          "libtss2-sys.so.1 => /lib/x86_64-linux-gnu/libtss2-sys.so.1 (0x00007a0a4b366000)"
+        ],
+        "qv_libs": [
+          "libcrypto",
+          "libtss2"
+        ],
+        "static_qv": true
+      },
+      "runtime_crypto_detected": false,
+      "runtime_random_detected": true,
+      "randomness_correlated_crypto": false,
+      "matched_crypto_count": 0,
+      "matched_random_count": 3,
+      "contaminating_events": 0,
+      "apis_matched": [
+        "Esys_GetRandom",
+        "getrandom"
+      ],
+      "algorithms_matched": [],
+      "expected_crypto": false,
+      "expected_random": true,
+      "crypto_match": true,
+      "random_match": true,
+      "contaminated": false,
+      "verdict": "PASS",
+      "notes": "Esys_GetRandom = random indicator only"
+    },
+    {
+      "id": "qed-tpm2-createprimary",
+      "category": "tpm",
+      "process_filter": "tpm2_createprim",
+      "run_ok": true,
+      "run_error": "",
+      "static": {
+        "exists": true,
+        "crypto_libs": [
+          "libtss2-esys.so.0 => /lib/x86_64-linux-gnu/libtss2-esys.so.0 (0x000077086a690000)",
+          "libtss2-mu.so.0 => /lib/x86_64-linux-gnu/libtss2-mu.so.0 (0x000077086a64b000)",
+          "libcrypto.so.1.1 => /lib/x86_64-linux-gnu/libcrypto.so.1.1 (0x000077086a375000)",
+          "libtss2-tctildr.so.0 => /lib/x86_64-linux-gnu/libtss2-tctildr.so.0 (0x000077086a36b000)",
+          "libtss2-rc.so.0 => /lib/x86_64-linux-gnu/libtss2-rc.so.0 (0x000077086a361000)",
+          "libcrypto.so.3 => /lib/x86_64-linux-gnu/libcrypto.so.3 (0x0000770869c38000)",
+          "libtss2-sys.so.1 => /lib/x86_64-linux-gnu/libtss2-sys.so.1 (0x0000770869c17000)"
+        ],
+        "qv_libs": [
+          "libcrypto",
+          "libtss2"
+        ],
+        "static_qv": true
+      },
+      "runtime_crypto_detected": true,
+      "runtime_random_detected": true,
+      "randomness_correlated_crypto": true,
+      "matched_crypto_count": 4,
+      "matched_random_count": 5,
+      "contaminating_events": 0,
+      "apis_matched": [
+        "EVP_DigestSignInit",
+        "Esys_CreatePrimary",
+        "RAND_bytes_ex",
+        "getrandom"
+      ],
+      "algorithms_matched": [
+        "HMAC"
+      ],
+      "expected_crypto": true,
+      "expected_random": null,
+      "crypto_match": true,
+      "random_match": true,
+      "contaminated": false,
+      "verdict": "PASS",
+      "notes": ""
+    },
+    {
+      "id": "qed-synthetic-rsa",
+      "category": "synthetic",
+      "process_filter": "openssl3.3-rsa",
+      "run_ok": true,
+      "run_error": "",
+      "static": {
+        "exists": true,
+        "crypto_libs": [
+          "libcrypto.so.3 => /lib/x86_64-linux-gnu/libcrypto.so.3 (0x0000787570a55000)"
+        ],
+        "qv_libs": [
+          "libcrypto"
+        ],
+        "static_qv": true
+      },
+      "runtime_crypto_detected": true,
+      "runtime_random_detected": true,
+      "randomness_correlated_crypto": true,
+      "matched_crypto_count": 3,
+      "matched_random_count": 4,
+      "contaminating_events": 0,
+      "apis_matched": [
+        "EVP_PKEY_sign",
+        "EVP_PKEY_verify",
+        "RAND_bytes_ex",
+        "RAND_priv_bytes_ex",
+        "getrandom"
+      ],
+      "algorithms_matched": [],
+      "expected_crypto": true,
+      "expected_random": null,
+      "crypto_match": true,
+      "random_match": true,
+      "contaminated": false,
+      "verdict": "PASS",
+      "notes": ""
+    }
+  ]
+}

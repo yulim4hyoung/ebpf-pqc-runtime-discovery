@@ -1,0 +1,140 @@
+{
+  "D_random (random alone)": {
+    "TP": 2,
+    "TN": 3,
+    "FP": 0,
+    "FN": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "D_api (crypto API)": {
+    "TP": 2,
+    "TN": 3,
+    "FP": 0,
+    "FN": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "D_corr (API + random correlation)": {
+    "TP": 2,
+    "TN": 3,
+    "FP": 0,
+    "FN": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "cases": [
+    {
+      "id": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 727,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 726,
+      "api_count": 1,
+      "corr_count": 1,
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 1722,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 2,
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 927,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 20,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "apis": [],
+      "random_apis": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "apis": [],
+      "random_apis": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "apis": [],
+      "random_apis": [],
+      "corr_sample": []
+    }
+  ]
+}

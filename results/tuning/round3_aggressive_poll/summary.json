@@ -1,0 +1,213 @@
+[
+  {
+    "round": "round3_aggressive_poll",
+    "benchmark": "latency",
+    "events_total": 19628,
+    "events_crypto": 30,
+    "events_random": 19598,
+    "latency_us": {
+      "samples": 19628,
+      "mean": 25,
+      "median": 28,
+      "p95": 36,
+      "p99": 51,
+      "min": 1,
+      "max": 328
+    },
+    "poll_timeout_ms": 1,
+    "minimal_json": 0
+  },
+  {
+    "round": "round3_aggressive_poll",
+    "benchmark": "throughput",
+    "results": [
+      {
+        "target_ops": 1,
+        "elapsed_sec": 0.21061177599995062,
+        "achieved_ops_sec": 4.748072586407678,
+        "events_detected": 1,
+        "detection_rate": 1.0,
+        "latency": {
+          "samples": 724,
+          "mean": 24,
+          "median": 28,
+          "p95": 40,
+          "p99": 58,
+          "min": 1,
+          "max": 211
+        }
+      },
+      {
+        "target_ops": 10,
+        "elapsed_sec": 1.087603733999913,
+        "achieved_ops_sec": 9.19452525528089,
+        "events_detected": 10,
+        "detection_rate": 1.0,
+        "latency": {
+          "samples": 6002,
+          "mean": 21,
+          "median": 27,
+          "p95": 34,
+          "p99": 49,
+          "min": 1,
+          "max": 818
+        }
+      },
+      {
+        "target_ops": 50,
+        "elapsed_sec": 7.009676098999989,
+        "achieved_ops_sec": 7.132997201844044,
+        "events_detected": 50,
+        "detection_rate": 1.0,
+        "latency": {
+          "samples": 34072,
+          "mean": 23,
+          "median": 28,
+          "p95": 36,
+          "p99": 62,
+          "min": 26,
+          "max": 594
+        }
+      },
+      {
+        "target_ops": 100,
+        "elapsed_sec": 12.344943408999825,
+        "achieved_ops_sec": 8.100482658113854,
+        "events_detected": 100,
+        "detection_rate": 1.0,
+        "latency": {
+          "samples": 65468,
+          "mean": 22,
+          "median": 27,
+          "p95": 34,
+          "p99": 57,
+          "min": 25,
+          "max": 643
+        }
+      },
+      {
+        "target_ops": 500,
+        "elapsed_sec": 64.32253751500002,
+        "achieved_ops_sec": 7.773325172120269,
+        "events_detected": 500,
+        "detection_rate": 1.0,
+        "latency": {
+          "samples": 330354,
+          "mean": 22,
+          "median": 27,
+          "p95": 34,
+          "p99": 56,
+          "min": 1,
+          "max": 2594
+        }
+      }
+    ]
+  },
+  {
+    "round": "round3_aggressive_poll",
+    "benchmark": "scalability",
+    "results": [
+      {
+        "processes": 1,
+        "elapsed_sec": 0.16427609899983509,
+        "events_total": 607,
+        "events_crypto": 3,
+        "latency": {
+          "samples": 607,
+          "mean": 24,
+          "median": 31,
+          "p95": 36,
+          "p99": 52,
+          "min": 1,
+          "max": 83
+        }
+      },
+      {
+        "processes": 2,
+        "elapsed_sec": 0.22853693700017175,
+        "events_total": 1272,
+        "events_crypto": 6,
+        "latency": {
+          "samples": 1272,
+          "mean": 22,
+          "median": 27,
+          "p95": 37,
+          "p99": 49,
+          "min": 1,
+          "max": 63
+        }
+      },
+      {
+        "processes": 4,
+        "elapsed_sec": 0.19227324699977544,
+        "events_total": 2438,
+        "events_crypto": 12,
+        "latency": {
+          "samples": 2438,
+          "mean": 22,
+          "median": 28,
+          "p95": 40,
+          "p99": 59,
+          "min": 7,
+          "max": 140
+        }
+      },
+      {
+        "processes": 8,
+        "elapsed_sec": 0.3169409799997993,
+        "events_total": 5538,
+        "events_crypto": 24,
+        "latency": {
+          "samples": 5538,
+          "mean": 20,
+          "median": 25,
+          "p95": 36,
+          "p99": 46,
+          "min": 1,
+          "max": 212
+        }
+      },
+      {
+        "processes": 16,
+        "elapsed_sec": 0.3211837550002201,
+        "events_total": 9855,
+        "events_crypto": 48,
+        "latency": {
+          "samples": 9855,
+          "mean": 1213,
+          "median": 29,
+          "p95": 5015,
+          "p99": 5431,
+          "min": 6,
+          "max": 5516
+        }
+      }
+    ]
+  },
+  {
+    "round": "round3_aggressive_poll",
+    "benchmark": "overhead",
+    "methodology": "longrun_v2",
+    "workload": "overhead_longrun.sh",
+    "workload_reps": "500",
+    "measure_reps": 5,
+    "measure": "median",
+    "m0_mean_sec": 54.955544146999955,
+    "m3_mean_sec": 63.1512468840001,
+    "overhead_pct": 14.913331974436561,
+    "m0_times": [
+      55.1196945260001,
+      54.955544146999955,
+      54.726354895999975,
+      57.5825183449997,
+      54.53179099900035
+    ],
+    "m3_times": [
+      65.6112044009999,
+      63.97572494499991,
+      63.1512468840001,
+      61.83037096199996,
+      61.777054060999944
+    ]
+  }
+]

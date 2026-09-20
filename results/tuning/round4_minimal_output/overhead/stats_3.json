@@ -1,0 +1,16 @@
+{
+  "events_total": 773,
+  "events_crypto": 3,
+  "events_random": 770,
+  "latency_us": {
+    "samples": 773,
+    "mean": 26,
+    "median": 29,
+    "p95": 44,
+    "p99": 60,
+    "min": 28,
+    "max": 67
+  },
+  "poll_timeout_ms": 1,
+  "minimal_json": 1
+}

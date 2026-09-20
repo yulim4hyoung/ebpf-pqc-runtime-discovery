@@ -1,0 +1,7 @@
+# Linux project: keep LF everywhere, regardless of the host's core.autocrlf.
+* text=auto eol=lf
+*.sh text eol=lf
+Makefile text eol=lf
+*.pdf binary
+*.png binary
+*.eps binary

@@ -1,0 +1,28 @@
+done.
+OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.5.5 27 Jan 2026)
+[case] native_evp done
+[case] native_cli done
+[case] native_mldsa done
+[case] liboqs_mlkem done
+[case] liboqs_mldsa done
+[case] curl_https done
+[case] tls_pqc_kem done
+[case] tls_classical_x25519 done
+# A10/A11 validation (2026-09-20 monitor) vs paper baseline
+
+Baseline = the logs under `results/` that the paper's numbers come from (unchanged).
+
+| Case | Crypto ev (new/base) | Named (new/base) | Anchored (new/base) | Family new | Family base | Conf new | Conf base |
+|---|---:|---:|---:|---|---|---|---|
+| native_evp | 15/15 | 10/4 | 15/15 | {'unknown': 5, 'PQC': 10} | {'classical': 11, 'PQC': 4} | {'0.5': 5, '1.0': 10} | {'0.5': 11, '1.0': 4} |
+| native_cli | 1/1 | 1/1 | 1/1 | {'PQC': 1} | {'PQC': 1} | {'1.0': 1} | {'1.0': 1} |
+| native_mldsa | 1/1 | 0/0 | 1/1 | {'unknown': 1} | {'classical': 1} | {'0.5': 1} | {'0.5': 1} |
+| liboqs_mlkem | 3/3 | 3/3 | 3/2 | {'PQC': 3} | {'PQC': 3} | {'1.0': 3} | {'0.9': 1, '1.0': 2} |
+| liboqs_mldsa | 3/3 | 3/3 | 3/3 | {'PQC': 3} | {'PQC': 3} | {'1.0': 3} | {'1.0': 3} |
+| curl_https | 8/4 | 4/1 | 8/4 | {'PQC': 3, 'classical': 1, 'unknown': 4} | {'classical': 4} | {'1.0': 4, '0.5': 4} | {'1.0': 1, '0.5': 3} |
+| tls_pqc_kem | 8/8 | 5/4 | 8/8 | {'PQC': 4, 'unknown': 3, 'classical': 1} | {'PQC': 3, 'classical': 5} | {'1.0': 5, '0.5': 3} | {'1.0': 4, '0.5': 4} |
+| tls_classical_x25519 | 2/2 | 1/1 | 2/2 | {'classical': 1, 'unknown': 1} | {'classical': 2} | {'1.0': 1, '0.5': 1} | {'1.0': 1, '0.5': 1} |
+
+written /work/results_a10a11/summary.md
+Results: <repo-root>/results_a10a11/summary.md
+validation exit=0

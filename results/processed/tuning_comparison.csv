@@ -1,0 +1,5 @@
+round,latency_median_us,latency_p95_us,latency_p99_us,overhead_pct,m0_sec,m3_sec
+round1_baseline,28,39,51,3.43,0.1212,0.1254
+round2_fast_poll,28,35,48,-12.27,0.1582,0.1388
+round3_aggressive_poll,28,36,51,-15.58,0.1252,0.1057
+round4_minimal_output,28,35,48,-6.4,0.1365,0.1278

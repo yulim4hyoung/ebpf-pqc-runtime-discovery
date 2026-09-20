@@ -1,0 +1,34 @@
+benchmarks:
+  latency_reps: 30
+  longrun_sample_interval: 60
+  longrun_seconds: 3600
+  overhead_reps: 10
+  scalability_procs:
+  - 1
+  - 2
+  - 4
+  - 8
+  - 16
+  throughput_ops:
+  - 1
+  - 10
+  - 50
+  - 100
+  - 500
+tuning_rounds:
+- description: Default poll interval, full JSON
+  id: round1_baseline
+  minimal_json: false
+  poll_ms: 100
+- description: 10ms ring buffer poll
+  id: round2_fast_poll
+  minimal_json: false
+  poll_ms: 10
+- description: 1ms poll, full JSON
+  id: round3_aggressive_poll
+  minimal_json: false
+  poll_ms: 1
+- description: 1ms poll, compact JSON
+  id: round4_minimal_output
+  minimal_json: true
+  poll_ms: 1

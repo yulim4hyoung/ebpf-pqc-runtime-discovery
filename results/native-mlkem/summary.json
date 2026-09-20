@@ -1,0 +1,56 @@
+{
+  "native_evp": {
+    "events_total": 21,
+    "crypto_events": 15,
+    "random_events": 6,
+    "by_api": {
+      "EVP_PKEY_keygen": 3,
+      "EVP_PKEY_encapsulate": 6,
+      "EVP_PKEY_decapsulate": 6
+    },
+    "by_algorithm": {
+      "": 11,
+      "ML-KEM-768": 3,
+      "ML-KEM-1024": 1
+    },
+    "pqc_events": 4,
+    "anchored_events": 15,
+    "anchored_pqc": 4,
+    "max_confidence": 1.0,
+    "detection_latency_us_median": 6
+  },
+  "native_cli": {
+    "events_total": 2,
+    "crypto_events": 1,
+    "random_events": 1,
+    "by_api": {
+      "EVP_PKEY_keygen": 1
+    },
+    "by_algorithm": {
+      "ML-KEM-768": 1
+    },
+    "pqc_events": 1,
+    "anchored_events": 1,
+    "anchored_pqc": 1,
+    "max_confidence": 1.0,
+    "detection_latency_us_median": 30
+  },
+  "liboqs": {
+    "events_total": 7,
+    "crypto_events": 3,
+    "random_events": 4,
+    "by_api": {
+      "OQS_KEM_keypair": 1,
+      "OQS_KEM_encaps": 1,
+      "OQS_KEM_decaps": 1
+    },
+    "by_algorithm": {
+      "ML-KEM-768": 3
+    },
+    "pqc_events": 3,
+    "anchored_events": 2,
+    "anchored_pqc": 2,
+    "max_confidence": 1.0,
+    "detection_latency_us_median": 32
+  }
+}

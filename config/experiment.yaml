@@ -1,0 +1,32 @@
+repetitions:
+  correctness: 10
+  accuracy: 20
+  performance: 10
+  scalability: 5
+  warmup: 2
+
+random_windows_us:
+  - 10
+  - 100
+  - 1000
+  - 10000
+  - 100000
+  - 1000000
+
+monitor_modes:
+  - M0
+  - M1
+  - M2
+  - M3
+
+scalability_processes:
+  - 1
+  - 2
+  - 4
+  - 8
+
+throughput_targets_ops:
+  - 1
+  - 10
+  - 100
+  - 1000

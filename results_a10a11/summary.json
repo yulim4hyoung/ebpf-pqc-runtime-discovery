@@ -1,0 +1,381 @@
+{
+  "native_evp": {
+    "new": {
+      "events_total": 23,
+      "crypto_events": 15,
+      "named": 15,
+      "unnamed": 0,
+      "by_api": {
+        "EVP_PKEY_keygen": 3,
+        "EVP_PKEY_encapsulate": 6,
+        "EVP_PKEY_decapsulate": 6
+      },
+      "by_algorithm": {
+        "ML-KEM-512": 5,
+        "ML-KEM-768": 5,
+        "ML-KEM-1024": 5
+      },
+      "by_family": {
+        "PQC": 15
+      },
+      "anchored": 15,
+      "confidence": {
+        "1.0": 15
+      },
+      "max_confidence": 1.0
+    },
+    "baseline": {
+      "events_total": 21,
+      "crypto_events": 15,
+      "named": 4,
+      "unnamed": 11,
+      "by_api": {
+        "EVP_PKEY_keygen": 3,
+        "EVP_PKEY_encapsulate": 6,
+        "EVP_PKEY_decapsulate": 6
+      },
+      "by_algorithm": {
+        "(none)": 11,
+        "ML-KEM-768": 3,
+        "ML-KEM-1024": 1
+      },
+      "by_family": {
+        "classical": 11,
+        "PQC": 4
+      },
+      "anchored": 15,
+      "confidence": {
+        "0.5": 11,
+        "1.0": 4
+      },
+      "max_confidence": 1.0
+    }
+  },
+  "native_cli": {
+    "new": {
+      "events_total": 4,
+      "crypto_events": 1,
+      "named": 1,
+      "unnamed": 0,
+      "by_api": {
+        "EVP_PKEY_keygen": 1
+      },
+      "by_algorithm": {
+        "ML-KEM-768": 1
+      },
+      "by_family": {
+        "PQC": 1
+      },
+      "anchored": 1,
+      "confidence": {
+        "1.0": 1
+      },
+      "max_confidence": 1.0
+    },
+    "baseline": {
+      "events_total": 2,
+      "crypto_events": 1,
+      "named": 1,
+      "unnamed": 0,
+      "by_api": {
+        "EVP_PKEY_keygen": 1
+      },
+      "by_algorithm": {
+        "ML-KEM-768": 1
+      },
+      "by_family": {
+        "PQC": 1
+      },
+      "anchored": 1,
+      "confidence": {
+        "1.0": 1
+      },
+      "max_confidence": 1.0
+    }
+  },
+  "native_mldsa": {
+    "new": {
+      "events_total": 4,
+      "crypto_events": 1,
+      "named": 1,
+      "unnamed": 0,
+      "by_api": {
+        "EVP_PKEY_keygen": 1
+      },
+      "by_algorithm": {
+        "ML-DSA-44": 1
+      },
+      "by_family": {
+        "PQC": 1
+      },
+      "anchored": 1,
+      "confidence": {
+        "1.0": 1
+      },
+      "max_confidence": 1.0
+    },
+    "baseline": {
+      "events_total": 4,
+      "crypto_events": 1,
+      "named": 0,
+      "unnamed": 1,
+      "by_api": {
+        "EVP_PKEY_keygen": 1
+      },
+      "by_algorithm": {
+        "(none)": 1
+      },
+      "by_family": {
+        "classical": 1
+      },
+      "anchored": 1,
+      "confidence": {
+        "0.5": 1
+      },
+      "max_confidence": 0.5
+    }
+  },
+  "liboqs_mlkem": {
+    "new": {
+      "events_total": 9,
+      "crypto_events": 3,
+      "named": 3,
+      "unnamed": 0,
+      "by_api": {
+        "OQS_KEM_keypair": 1,
+        "OQS_KEM_encaps": 1,
+        "OQS_KEM_decaps": 1
+      },
+      "by_algorithm": {
+        "ML-KEM-768": 3
+      },
+      "by_family": {
+        "PQC": 3
+      },
+      "anchored": 3,
+      "confidence": {
+        "1.0": 3
+      },
+      "max_confidence": 1.0
+    },
+    "baseline": {
+      "events_total": 7,
+      "crypto_events": 3,
+      "named": 3,
+      "unnamed": 0,
+      "by_api": {
+        "OQS_KEM_keypair": 1,
+        "OQS_KEM_encaps": 1,
+        "OQS_KEM_decaps": 1
+      },
+      "by_algorithm": {
+        "ML-KEM-768": 3
+      },
+      "by_family": {
+        "PQC": 3
+      },
+      "anchored": 2,
+      "confidence": {
+        "0.9": 1,
+        "1.0": 2
+      },
+      "max_confidence": 1.0
+    }
+  },
+  "liboqs_mldsa": {
+    "new": {
+      "events_total": 9,
+      "crypto_events": 3,
+      "named": 3,
+      "unnamed": 0,
+      "by_api": {
+        "OQS_SIG_keypair": 1,
+        "OQS_SIG_sign": 1,
+        "OQS_SIG_verify": 1
+      },
+      "by_algorithm": {
+        "ML-DSA-65": 3
+      },
+      "by_family": {
+        "PQC": 3
+      },
+      "anchored": 3,
+      "confidence": {
+        "1.0": 3
+      },
+      "max_confidence": 1.0
+    },
+    "baseline": {
+      "events_total": 9,
+      "crypto_events": 3,
+      "named": 3,
+      "unnamed": 0,
+      "by_api": {
+        "OQS_SIG_keypair": 1,
+        "OQS_SIG_sign": 1,
+        "OQS_SIG_verify": 1
+      },
+      "by_algorithm": {
+        "ML-DSA-65": 3
+      },
+      "by_family": {
+        "PQC": 3
+      },
+      "anchored": 3,
+      "confidence": {
+        "1.0": 3
+      },
+      "max_confidence": 1.0
+    }
+  },
+  "curl_https": {
+    "new": {
+      "events_total": 20,
+      "crypto_events": 8,
+      "named": 5,
+      "unnamed": 3,
+      "by_api": {
+        "EVP_PKEY_keygen": 2,
+        "EVP_PKEY_decapsulate": 3,
+        "EVP_DigestVerifyInit": 3
+      },
+      "by_algorithm": {
+        "X25519MLKEM768": 3,
+        "X25519": 1,
+        "ML-KEM-768": 1,
+        "(none)": 3
+      },
+      "by_family": {
+        "PQC": 4,
+        "classical": 1,
+        "unknown": 3
+      },
+      "anchored": 8,
+      "confidence": {
+        "1.0": 5,
+        "0.5": 3
+      },
+      "max_confidence": 1.0
+    },
+    "baseline": {
+      "events_total": 13,
+      "crypto_events": 4,
+      "named": 1,
+      "unnamed": 3,
+      "by_api": {
+        "EVP_PKEY_keygen": 1,
+        "EVP_DigestVerifyInit": 3
+      },
+      "by_algorithm": {
+        "X25519": 1,
+        "(none)": 3
+      },
+      "by_family": {
+        "classical": 4
+      },
+      "anchored": 4,
+      "confidence": {
+        "1.0": 1,
+        "0.5": 3
+      },
+      "max_confidence": 1.0
+    }
+  },
+  "tls_pqc_kem": {
+    "new": {
+      "events_total": 36,
+      "crypto_events": 8,
+      "named": 8,
+      "unnamed": 0,
+      "by_api": {
+        "EVP_PKEY_keygen": 2,
+        "EVP_PKEY_encapsulate": 3,
+        "EVP_PKEY_decapsulate": 3
+      },
+      "by_algorithm": {
+        "X25519MLKEM768": 5,
+        "ML-KEM-768": 2,
+        "X25519": 1
+      },
+      "by_family": {
+        "PQC": 7,
+        "classical": 1
+      },
+      "anchored": 8,
+      "confidence": {
+        "1.0": 8
+      },
+      "max_confidence": 1.0
+    },
+    "baseline": {
+      "events_total": 35,
+      "crypto_events": 8,
+      "named": 4,
+      "unnamed": 4,
+      "by_api": {
+        "EVP_PKEY_keygen": 2,
+        "EVP_PKEY_encapsulate": 3,
+        "EVP_PKEY_decapsulate": 3
+      },
+      "by_algorithm": {
+        "X25519MLKEM768": 3,
+        "(none)": 4,
+        "X25519": 1
+      },
+      "by_family": {
+        "PQC": 3,
+        "classical": 5
+      },
+      "anchored": 8,
+      "confidence": {
+        "1.0": 4,
+        "0.5": 4
+      },
+      "max_confidence": 1.0
+    }
+  },
+  "tls_classical_x25519": {
+    "new": {
+      "events_total": 28,
+      "crypto_events": 2,
+      "named": 2,
+      "unnamed": 0,
+      "by_api": {
+        "EVP_PKEY_keygen": 2
+      },
+      "by_algorithm": {
+        "X25519": 2
+      },
+      "by_family": {
+        "classical": 2
+      },
+      "anchored": 2,
+      "confidence": {
+        "1.0": 2
+      },
+      "max_confidence": 1.0
+    },
+    "baseline": {
+      "events_total": 28,
+      "crypto_events": 2,
+      "named": 1,
+      "unnamed": 1,
+      "by_api": {
+        "EVP_PKEY_keygen": 2
+      },
+      "by_algorithm": {
+        "X25519": 1,
+        "(none)": 1
+      },
+      "by_family": {
+        "classical": 2
+      },
+      "anchored": 2,
+      "confidence": {
+        "1.0": 1,
+        "0.5": 1
+      },
+      "max_confidence": 1.0
+    }
+  }
+}

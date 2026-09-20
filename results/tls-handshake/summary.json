@@ -1,0 +1,37 @@
+{
+  "pqc_kem": {
+    "events_total": 35,
+    "crypto_events": 8,
+    "random_events": 27,
+    "by_api": {
+      "EVP_PKEY_keygen": 2,
+      "EVP_PKEY_encapsulate": 3,
+      "EVP_PKEY_decapsulate": 3
+    },
+    "by_algorithm": {
+      "X25519MLKEM768": 3,
+      "": 4,
+      "X25519": 1
+    },
+    "pqc_events": 3,
+    "anchored_events": 8,
+    "anchored_pqc": 3,
+    "max_confidence": 1.0
+  },
+  "classical_x25519": {
+    "events_total": 28,
+    "crypto_events": 2,
+    "random_events": 26,
+    "by_api": {
+      "EVP_PKEY_keygen": 2
+    },
+    "by_algorithm": {
+      "X25519": 1,
+      "": 1
+    },
+    "pqc_events": 0,
+    "anchored_events": 2,
+    "anchored_pqc": 0,
+    "max_confidence": 1.0
+  }
+}

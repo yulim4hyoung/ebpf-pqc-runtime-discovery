@@ -1,0 +1,232 @@
+[
+  {
+    "round": "round4_minimal_output",
+    "benchmark": "latency",
+    "events_total": 20383,
+    "events_crypto": 30,
+    "events_random": 20353,
+    "latency_us": {
+      "samples": 20383,
+      "mean": 24,
+      "median": 28,
+      "p95": 35,
+      "p99": 48,
+      "min": 27,
+      "max": 115
+    },
+    "poll_timeout_ms": 1,
+    "minimal_json": 1
+  },
+  {
+    "round": "round4_minimal_output",
+    "benchmark": "throughput",
+    "results": [
+      {
+        "target_ops": 1,
+        "elapsed_sec": 0.14978993300019283,
+        "achieved_ops_sec": 6.676016071111485,
+        "events_detected": 1,
+        "detection_rate": 1.0,
+        "latency": {
+          "samples": 643,
+          "mean": 27,
+          "median": 30,
+          "p95": 41,
+          "p99": 74,
+          "min": 24,
+          "max": 118
+        }
+      },
+      {
+        "target_ops": 10,
+        "elapsed_sec": 1.2232944600000337,
+        "achieved_ops_sec": 8.174646683186749,
+        "events_detected": 10,
+        "detection_rate": 1.0,
+        "latency": {
+          "samples": 6403,
+          "mean": 23,
+          "median": 27,
+          "p95": 33,
+          "p99": 45,
+          "min": 1,
+          "max": 123
+        }
+      },
+      {
+        "target_ops": 50,
+        "elapsed_sec": 6.463498375000199,
+        "achieved_ops_sec": 7.735748831219975,
+        "events_detected": 50,
+        "detection_rate": 1.0,
+        "latency": {
+          "samples": 33162,
+          "mean": 24,
+          "median": 27,
+          "p95": 34,
+          "p99": 56,
+          "min": 1,
+          "max": 350
+        }
+      },
+      {
+        "target_ops": 100,
+        "elapsed_sec": 13.340242203000344,
+        "achieved_ops_sec": 7.496115773483414,
+        "events_detected": 100,
+        "detection_rate": 1.0,
+        "latency": {
+          "samples": 66426,
+          "mean": 24,
+          "median": 28,
+          "p95": 33,
+          "p99": 52,
+          "min": 1,
+          "max": 3170
+        }
+      },
+      {
+        "target_ops": 500,
+        "elapsed_sec": 65.45061726199992,
+        "achieved_ops_sec": 7.6393473570843735,
+        "events_detected": 500,
+        "detection_rate": 1.0,
+        "latency": {
+          "samples": 331302,
+          "mean": 24,
+          "median": 27,
+          "p95": 34,
+          "p99": 55,
+          "min": 4,
+          "max": 862
+        }
+      }
+    ]
+  },
+  {
+    "round": "round4_minimal_output",
+    "benchmark": "scalability",
+    "results": [
+      {
+        "processes": 1,
+        "elapsed_sec": 0.16450949299996864,
+        "events_total": 585,
+        "events_crypto": 3,
+        "latency": {
+          "samples": 585,
+          "mean": 27,
+          "median": 30,
+          "p95": 41,
+          "p99": 61,
+          "min": 26,
+          "max": 72
+        }
+      },
+      {
+        "processes": 2,
+        "elapsed_sec": 0.16478405699990617,
+        "events_total": 1170,
+        "events_crypto": 6,
+        "latency": {
+          "samples": 1170,
+          "mean": 24,
+          "median": 29,
+          "p95": 36,
+          "p99": 55,
+          "min": 3,
+          "max": 602
+        }
+      },
+      {
+        "processes": 4,
+        "elapsed_sec": 0.27878611999994973,
+        "events_total": 2974,
+        "events_crypto": 12,
+        "latency": {
+          "samples": 2974,
+          "mean": 21,
+          "median": 26,
+          "p95": 35,
+          "p99": 51,
+          "min": 19,
+          "max": 418
+        }
+      },
+      {
+        "processes": 8,
+        "elapsed_sec": 0.46732068600022103,
+        "events_total": 6364,
+        "events_crypto": 24,
+        "latency": {
+          "samples": 6364,
+          "mean": 25,
+          "median": 27,
+          "p95": 44,
+          "p99": 156,
+          "min": 17,
+          "max": 757
+        }
+      },
+      {
+        "processes": 16,
+        "elapsed_sec": 0.36066538400018544,
+        "events_total": 10793,
+        "events_crypto": 48,
+        "latency": {
+          "samples": 10793,
+          "mean": 764,
+          "median": 28,
+          "p95": 4256,
+          "p99": 5309,
+          "min": 1,
+          "max": 5437
+        }
+      }
+    ]
+  },
+  {
+    "round": "round4_minimal_output",
+    "benchmark": "longrun",
+    "duration_sec": 3600,
+    "events_total": 1111095,
+    "events_crypto": 5025,
+    "events_random": 1106070,
+    "latency_us": {
+      "samples": 1000000,
+      "mean": 29,
+      "median": 30,
+      "p95": 37,
+      "p99": 60,
+      "min": 3,
+      "max": 6397
+    },
+    "poll_timeout_ms": 1,
+    "minimal_json": 1
+  },
+  {
+    "round": "round4_minimal_output",
+    "benchmark": "overhead",
+    "methodology": "longrun_v2",
+    "workload": "overhead_longrun.sh",
+    "workload_reps": "500",
+    "measure_reps": 5,
+    "measure": "median",
+    "m0_mean_sec": 56.13335017300005,
+    "m3_mean_sec": 64.17923343999973,
+    "overhead_pct": 14.333516959530623,
+    "m0_times": [
+      54.51709420799989,
+      54.93197365800006,
+      56.43448602999979,
+      56.13335017300005,
+      56.7338212059999
+    ],
+    "m3_times": [
+      65.53720335900016,
+      65.00388938399965,
+      62.68024937000018,
+      64.17923343999973,
+      62.47790220200022
+    ]
+  }
+]

@@ -1,0 +1,5 @@
+round,m0_mean_sec,m3_mean_sec,overhead_pct
+round1_baseline,0.1212,0.1254,3.43
+round2_fast_poll,0.1582,0.1388,-12.27
+round3_aggressive_poll,0.1252,0.1057,-15.58
+round4_minimal_output,0.1365,0.1278,-6.4

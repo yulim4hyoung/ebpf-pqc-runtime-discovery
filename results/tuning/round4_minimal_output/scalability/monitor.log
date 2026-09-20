@@ -1,0 +1,15 @@
+libbpf: failed to determine tracepoint 'syscalls/sys_enter_getrandom' perf event ID: No such file or directory
+libbpf: prog 'trace_getrandom': failed to create tracepoint 'syscalls/sys_enter_getrandom' perf event: No such file or directory
+warning: attach trace_getrandom failed: -2
+libbpf: failed to determine tracepoint 'syscalls/sys_enter_getrandom' perf event ID: No such file or directory
+libbpf: prog 'trace_getrandom': failed to create tracepoint 'syscalls/sys_enter_getrandom' perf event: No such file or directory
+warning: attach trace_getrandom failed: -2
+libbpf: failed to determine tracepoint 'syscalls/sys_enter_getrandom' perf event ID: No such file or directory
+libbpf: prog 'trace_getrandom': failed to create tracepoint 'syscalls/sys_enter_getrandom' perf event: No such file or directory
+warning: attach trace_getrandom failed: -2
+libbpf: failed to determine tracepoint 'syscalls/sys_enter_getrandom' perf event ID: No such file or directory
+libbpf: prog 'trace_getrandom': failed to create tracepoint 'syscalls/sys_enter_getrandom' perf event: No such file or directory
+warning: attach trace_getrandom failed: -2
+libbpf: failed to determine tracepoint 'syscalls/sys_enter_getrandom' perf event ID: No such file or directory
+libbpf: prog 'trace_getrandom': failed to create tracepoint 'syscalls/sys_enter_getrandom' perf event: No such file or directory
+warning: attach trace_getrandom failed: -2

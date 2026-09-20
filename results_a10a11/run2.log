@@ -1,0 +1,78 @@
+=== run2: validation ===
+done.
+OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.5.5 27 Jan 2026)
+[case] native_evp done
+[case] native_cli done
+[case] native_mldsa done
+[case] liboqs_mlkem done
+[case] liboqs_mldsa done
+[case] curl_https done
+[case] tls_pqc_kem done
+[case] tls_classical_x25519 done
+# A10/A11 validation (2026-09-20 monitor) vs paper baseline
+
+Baseline = the logs under `results/` that the paper's numbers come from (unchanged).
+
+| Case | Crypto ev (new/base) | Named (new/base) | Anchored (new/base) | Family new | Family base | Conf new | Conf base |
+|---|---:|---:|---:|---|---|---|---|
+| native_evp | 15/15 | 15/4 | 15/15 | {'PQC': 15} | {'classical': 11, 'PQC': 4} | {'1.0': 15} | {'0.5': 11, '1.0': 4} |
+| native_cli | 1/1 | 1/1 | 1/1 | {'PQC': 1} | {'PQC': 1} | {'1.0': 1} | {'1.0': 1} |
+| native_mldsa | 1/1 | 1/0 | 1/1 | {'PQC': 1} | {'classical': 1} | {'1.0': 1} | {'0.5': 1} |
+| liboqs_mlkem | 3/3 | 3/3 | 3/2 | {'PQC': 3} | {'PQC': 3} | {'1.0': 3} | {'0.9': 1, '1.0': 2} |
+| liboqs_mldsa | 3/3 | 3/3 | 3/3 | {'PQC': 3} | {'PQC': 3} | {'1.0': 3} | {'1.0': 3} |
+| curl_https | 8/4 | 5/1 | 8/4 | {'PQC': 4, 'classical': 1, 'unknown': 3} | {'classical': 4} | {'1.0': 5, '0.5': 3} | {'1.0': 1, '0.5': 3} |
+| tls_pqc_kem | 8/8 | 8/4 | 8/8 | {'PQC': 7, 'classical': 1} | {'PQC': 3, 'classical': 5} | {'1.0': 8} | {'1.0': 4, '0.5': 4} |
+| tls_classical_x25519 | 2/2 | 2/1 | 2/2 | {'classical': 2} | {'classical': 2} | {'1.0': 2} | {'1.0': 1, '0.5': 1} |
+
+written /work/results_a10a11/summary.md
+Results: <repo-root>/results_a10a11/summary.md
+validation exit=0
+=== run2: qed-realworld + randomness-eval ===
+=== QED Real-World Application Tests ===
+QED repo: <qed-repo>
+done.
+libssl1.1 not in repo, trying manual fetch
+Selecting previously unselected package libssl1.1:amd64.
+(Reading database ... 17866 files and directories currently installed.)
+Preparing to unpack /tmp/libssl.deb ...
+Unpacking libssl1.1:amd64 (1.1.1f-1ubuntu2) ...
+Setting up libssl1.1:amd64 (1.1.1f-1ubuntu2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+-rwxrwxrwx 1 ubuntu ubuntu 502112 Sep 20 03:01 /work/build/crypto-monitor
+[RUN] curl-https (filter=curl) ...
+  monitor ready after 0.1 s
+  crypto=4 random=12 contam=0 correlated=True -> PASS
+[RUN] wget-https (filter=wget) ...
+  monitor ready after 0.1 s
+  crypto=11 random=9 contam=0 correlated=True -> PASS
+[RUN] ssh-version (filter=ssh) ...
+  monitor ready after 0.1 s
+  crypto=0 random=3 contam=0 correlated=False -> PASS
+[RUN] md5sum (filter=md5sum) ...
+  monitor ready after 0.1 s
+  crypto=0 random=1 contam=0 correlated=False -> FAIL
+[RUN] tpm2-getrandom (filter=tpm2_getrandom) ...
+  monitor ready after 0.1 s
+  crypto=0 random=4 contam=0 correlated=False -> PASS
+[RUN] tpm2-createprimary-rsa (filter=tpm2_createprim) ...
+  monitor ready after 0.2 s
+  crypto=4 random=6 contam=0 correlated=True -> PASS
+[RUN] qed-tpm2-getrandom (filter=tpm2_getrandom) ...
+  monitor ready after 0.1 s
+  crypto=0 random=3 contam=0 correlated=False -> PASS
+[RUN] qed-tpm2-createprimary (filter=tpm2_createprim) ...
+  monitor ready after 0.1 s
+  crypto=4 random=5 contam=0 correlated=True -> PASS
+[RUN] qed-synthetic-rsa (filter=openssl3.3-rsa) ...
+  monitor ready after 0.1 s
+  crypto=3 random=4 contam=0 correlated=True -> PASS
+
+Wrote /work/results_a10a11/qed-realworld/comparison.md
+Wrote /work/results_a10a11/qed-realworld/RANDOMNESS.md
+Traceback (most recent call last):
+  File "/work/scripts/run_randomness_eval.py", line 20, in <module>
+    OUT = ROOT / os.environ.get("RESULTS_DIR", "results") / "randomness-eval"
+                 ^^
+NameError: name 'os' is not defined. Did you forget to import 'os'?
+qed exit=1
+ALL DONE

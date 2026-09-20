@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-08-29T02:28:58+00:00",
+  "uname": "Linux Ubuntu-Desktop 7.0.0-22-generic #22-Ubuntu SMP PREEMPT_DYNAMIC Mon May 25 15:54:34 UTC 2026 x86_64 GNU/Linux",
+  "openssl": "OpenSSL 3.5.5 27 Jan 2026 (Library: OpenSSL 3.5.5 27 Jan 2026)",
+  "clang": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+  "bpftool": "bpftool v7.4.0",
+  "btf": true,
+  "liboqs": true,
+  "uid": 1000,
+  "kernel_config": {
+    "CONFIG_BPF": "unknown",
+    "CONFIG_BPF_SYSCALL": "unknown",
+    "CONFIG_UPROBE_EVENTS": "unknown",
+    "CONFIG_KPROBE_EVENTS": "unknown",
+    "CONFIG_BPF_JIT": "unknown",
+    "CONFIG_BPF": "end"
+  }
+}

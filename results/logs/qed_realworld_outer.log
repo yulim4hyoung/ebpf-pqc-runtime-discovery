@@ -1,0 +1,62 @@
+=== QED Real-World Application Tests ===
+QED repo: <qed-repo>
+done.
+libssl1.1 not in repo, trying manual fetch
+Selecting previously unselected package libssl1.1:amd64.
+(Reading database ... 17866 files and directories currently installed.)
+Preparing to unpack /tmp/libssl.deb ...
+Unpacking libssl1.1:amd64 (1.1.1f-1ubuntu2) ...
+Setting up libssl1.1:amd64 (1.1.1f-1ubuntu2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
+-rwxr-xr-x 1 ubuntu ubuntu 501136 Aug 28 06:04 /work/build/crypto-monitor
+[RUN] curl-https (filter=curl) ...
+  crypto=4 random=9 contam=0 correlated=True -> PASS
+[RUN] wget-https (filter=wget) ...
+  crypto=11 random=7 contam=0 correlated=True -> PASS
+[RUN] ssh-version (filter=ssh) ...
+  crypto=0 random=1 contam=0 correlated=False -> PASS
+[RUN] md5sum (filter=md5sum) ...
+  crypto=0 random=0 contam=0 correlated=False -> PASS
+[RUN] tpm2-getrandom (filter=tpm2_getrandom) ...
+  crypto=0 random=2 contam=0 correlated=False -> PASS
+[RUN] tpm2-createprimary-rsa (filter=tpm2_createprim) ...
+  crypto=4 random=2 contam=0 correlated=True -> PASS
+[RUN] qed-tpm2-getrandom (filter=tpm2_getrandom) ...
+  crypto=0 random=2 contam=0 correlated=False -> PASS
+[RUN] qed-tpm2-createprimary (filter=tpm2_createprim) ...
+  crypto=4 random=2 contam=0 correlated=True -> PASS
+[RUN] qed-synthetic-rsa (filter=openssl3.3-rsa) ...
+  crypto=3 random=2 contam=0 correlated=True -> PASS
+
+Wrote /work/results/qed-realworld/comparison.md
+Wrote /work/results/qed-realworld/RANDOMNESS.md
+[+] positive openssl RSA keygen
+[+] positive liboqs ML-KEM
+[-] negative getrandom-only
+[-] negative /dev/urandom
+[-] negative uuid
+# Randomness detector evaluation
+
+| Detector | Precision | Recall | F1 | FP | FN |
+|---|---:|---:|---:|---:|---:|
+| D_random (random alone) | 1.00 | 1.00 | 1.00 | 0 | 0 |
+| D_api (crypto API) | 1.00 | 1.00 | 1.00 | 0 | 0 |
+| D_corr (API + random correlation) | 1.00 | 1.00 | 1.00 | 0 | 0 |
+
+## Per-case
+
+| Case | Label | D_random | D_api | D_corr | APIs |
+|---|---|---|---|---|---|
+| pos_rsa | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom | random_only | False | False | False |  |
+| neg_urandom | random_only | False | False | False |  |
+| neg_uuid | random_only | False | False | False |  |
+
+## Interpretation
+- **D_random alone is NOT a valid crypto detector** — negatives that call getrandom become FPs.
+- **D_api** is the primary detector.
+- **D_corr** raises confidence when randomness precedes a crypto API; it does not invent detections.
+
+Results: <repo-root>/results/qed-realworld/
+Randomness eval: <repo-root>/results/randomness-eval/

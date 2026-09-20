@@ -1,0 +1,87 @@
+# QED paper real-world application tests
+# Reference: https://github.com/norrathep/qed
+# Static QED detects QV dependencies; our monitor detects runtime crypto API usage.
+
+apps:
+  # --- Network (QED datasets/real-world/network/) ---
+  - id: curl-https
+    category: network
+    source: qed
+    cmd: ["/work/qed/datasets/real-world/network/curl", "-sI", "--max-time", "5", "https://example.com"]
+    expected_crypto: true
+    expected_qv: true
+    notes: "OpenSSL/GnuTLS via libssl.so.3"
+
+  - id: wget-https
+    category: network
+    source: qed
+    cmd: ["/work/qed/datasets/real-world/network/wget", "-q", "-O", "/dev/null", "--timeout=5", "https://example.com"]
+    expected_crypto: true
+    expected_qv: true
+
+  - id: ssh-version
+    category: network
+    source: qed
+    cmd: ["/work/qed/datasets/real-world/network/ssh", "-V"]
+    expected_crypto: false
+    expected_random: true
+    expected_qv: false
+    notes: "ssh -V may RAND_bytes on init; that is NOT a crypto operation"
+
+  - id: md5sum
+    category: coreutils
+    source: qed
+    cmd: ["md5sum", "/etc/hosts"]
+    expected_crypto: false
+    expected_random: false
+    expected_qv: false
+    notes: "Hash only, not QV per QED (symmetric hash)"
+
+  # --- TPM2 tools (system packages + QED binaries) ---
+  - id: tpm2-getrandom
+    category: tpm
+    source: system
+    cmd: ["tpm2_getrandom", "16", "-o", "/tmp/tpm_rand.bin"]
+    expected_crypto: false
+    expected_random: true
+    expected_qv: false
+    needs_tpm: true
+    notes: "TPM GetRandom is randomness, not QV crypto primitive"
+
+  - id: tpm2-createprimary-rsa
+    category: tpm
+    source: system
+    cmd: ["tpm2_createprimary", "-C", "o", "-G", "rsa2048", "-c", "/tmp/tpm_ctx.ctx"]
+    expected_crypto: true
+    expected_qv: true
+    needs_tpm: true
+    notes: "RSA-2048 primary key in TPM (QV)"
+
+  - id: qed-tpm2-getrandom
+    category: tpm
+    source: qed
+    cmd: ["/work/qed/datasets/real-world/tpm2-tools/tpm2_getrandom", "16"]
+    expected_crypto: false
+    expected_random: true
+    expected_qv: false
+    needs_tpm: true
+    needs_qed_libs: true
+    notes: "Esys_GetRandom = random indicator only"
+
+  - id: qed-tpm2-createprimary
+    category: tpm
+    source: qed
+    cmd: ["/work/qed/datasets/real-world/tpm2-tools/tpm2_createprimary", "-C", "o", "-G", "rsa2048"]
+    expected_crypto: true
+    expected_qv: true
+    needs_tpm: true
+    needs_qed_libs: true
+
+  # --- QED synthetic (runnable after dataset-make) ---
+  - id: qed-synthetic-rsa
+    category: synthetic
+    source: qed
+    cmd: ["/work/qed/datasets/synthetic/bin/openssl3.3-rsa"]
+    expected_crypto: true
+    expected_qv: true
+    optional: true

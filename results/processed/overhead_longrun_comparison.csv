@@ -1,0 +1,5 @@
+round,m0_sec,m3_sec,overhead_pct,measure,workload_reps
+round1_baseline,55.069,64.477,17.09,mean,500
+round2_fast_poll,55.679,65.478,17.6,mean,500
+round3_aggressive_poll,54.956,63.151,14.91,mean,500
+round4_minimal_output,56.133,64.179,14.33,mean,500
