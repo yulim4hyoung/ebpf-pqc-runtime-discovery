@@ -1,4 +1,4 @@
-# ebpf-crypto-monitor
+# ebpf-pqc-runtime-discovery
 
 Runtime discovery of cryptographic operations on Linux with eBPF, using
 randomness as a temporal anchor.
