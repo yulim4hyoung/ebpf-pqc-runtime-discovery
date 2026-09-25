@@ -160,7 +160,10 @@ def run_with_monitor(app: dict, out_dir: Path) -> dict:
 
     run_ok, err = False, ""
     try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=30, env=env)
+        # errors="replace": tpm2_getrandom writes raw random bytes to stdout, which
+        # are not valid UTF-8; strict decoding raised and marked a clean run failed.
+        r = subprocess.run(cmd, capture_output=True, text=True, errors="replace",
+                           timeout=30, env=env)
         run_ok = r.returncode == 0
         log.write_text(r.stdout + "\n" + r.stderr)
         if not run_ok:

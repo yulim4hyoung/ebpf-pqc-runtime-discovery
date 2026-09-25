@@ -1,0 +1,30 @@
+[RUN] curl-https (filter=curl) ...
+  monitor ready after 0.1 s
+  crypto=5 random=9 contam=0 correlated=True -> PASS
+[RUN] wget-https (filter=wget) ...
+  monitor ready after 0.1 s
+  crypto=11 random=7 contam=0 correlated=True -> PASS
+[RUN] ssh-version (filter=ssh) ...
+  monitor ready after 0.1 s
+  crypto=0 random=1 contam=0 correlated=False -> PASS
+[RUN] md5sum (filter=md5sum) ...
+  monitor ready after 0.1 s
+  crypto=0 random=0 contam=0 correlated=False -> PASS
+[RUN] tpm2-getrandom (filter=tpm2_getrandom) ...
+  monitor ready after 0.1 s
+  crypto=0 random=2 contam=0 correlated=False -> PASS
+[RUN] tpm2-createprimary-rsa (filter=tpm2_createprim) ...
+  monitor ready after 0.1 s
+  crypto=4 random=2 contam=0 correlated=True -> PASS
+[RUN] qed-tpm2-getrandom (filter=tpm2_getrandom) ...
+  monitor ready after 0.1 s
+  crypto=0 random=2 contam=0 correlated=False -> PASS
+[RUN] qed-tpm2-createprimary (filter=tpm2_createprim) ...
+  monitor ready after 0.1 s
+  crypto=4 random=2 contam=0 correlated=True -> PASS
+[RUN] qed-synthetic-rsa (filter=openssl3.3-rsa) ...
+  monitor ready after 0.1 s
+  crypto=3 random=2 contam=0 correlated=True -> PASS
+
+Wrote /work/results_rep2/qed-realworld/comparison.md
+Wrote /work/results_rep2/qed-realworld/RANDOMNESS.md

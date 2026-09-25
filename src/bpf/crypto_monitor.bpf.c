@@ -8,7 +8,22 @@
 
 char LICENSE[] SEC("license") = "Dual BSD/GPL";
 
-#define LIBCRYPTO_PATH "/usr/lib/x86_64-linux-gnu/libcrypto.so.3"
+
+/*
+ * The libcrypto probes are attached to both OpenSSL 3 and OpenSSL 1.1
+ * (crypto_monitor.c, attach_all()); the daemon passes the library index as
+ * the uprobe's attach cookie so each event names the library it actually
+ * fired in. Fixed 64-byte arrays keep the copy into e->library in bounds.
+ */
+#define LIBCRYPTO_COOKIE_11 1
+static const char libcrypto3_path[64] = "/usr/lib/x86_64-linux-gnu/libcrypto.so.3";
+static const char libcrypto11_path[64] = "/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1";
+
+static __always_inline const char *crypto_lib(void *ctx)
+{
+	return bpf_get_attach_cookie(ctx) == LIBCRYPTO_COOKIE_11 ?
+		libcrypto11_path : libcrypto3_path;
+}
 #define LIBOQS_PATH    "/usr/local/lib/liboqs.so"
 #define LIBTSS2_PATH   "/usr/lib/x86_64-linux-gnu/libtss2-esys.so.0"
 
@@ -444,7 +459,7 @@ int uretprobe_evp_pkey_keygen(struct pt_regs *ctx)
 	 */
 	__u64 ctx_ptr = finish_call(&pending_keygen, PT_REGS_RC(ctx));
 
-	return emit_crypto("EVP_PKEY_keygen", LIBCRYPTO_PATH, OP_KEYGEN, ctx_ptr, 0);
+	return emit_crypto("EVP_PKEY_keygen", crypto_lib(ctx), OP_KEYGEN, ctx_ptr, 0);
 }
 
 SEC("uprobe")
@@ -493,14 +508,14 @@ int uprobe_evp_pkey_ctx_free(struct pt_regs *ctx)
 SEC("uprobe")
 int uprobe_evp_pkey_encapsulate(struct pt_regs *ctx)
 {
-	return emit_crypto("EVP_PKEY_encapsulate", LIBCRYPTO_PATH, OP_ENCAPS,
+	return emit_crypto("EVP_PKEY_encapsulate", crypto_lib(ctx), OP_ENCAPS,
 			   PT_REGS_PARM1(ctx), 0);
 }
 
 SEC("uprobe")
 int uprobe_evp_pkey_decapsulate(struct pt_regs *ctx)
 {
-	return emit_crypto("EVP_PKEY_decapsulate", LIBCRYPTO_PATH, OP_DECAPS,
+	return emit_crypto("EVP_PKEY_decapsulate", crypto_lib(ctx), OP_DECAPS,
 			   PT_REGS_PARM1(ctx), 0);
 }
 
@@ -510,14 +525,14 @@ int uprobe_evp_pkey_sign(struct pt_regs *ctx)
 	/* EVP_PKEY_sign(ctx, sig, siglen, tbs, tbslen) — ctx = arg1.
 	 * Covers sign paths that never touch keygen (e.g. hard-coded keys),
 	 * the coverage gap exposed by the qed-synthetic-rsa case. */
-	return emit_crypto("EVP_PKEY_sign", LIBCRYPTO_PATH, OP_SIGN,
+	return emit_crypto("EVP_PKEY_sign", crypto_lib(ctx), OP_SIGN,
 			   PT_REGS_PARM1(ctx), 0);
 }
 
 SEC("uprobe")
 int uprobe_evp_pkey_verify(struct pt_regs *ctx)
 {
-	return emit_crypto("EVP_PKEY_verify", LIBCRYPTO_PATH, OP_VERIFY,
+	return emit_crypto("EVP_PKEY_verify", crypto_lib(ctx), OP_VERIFY,
 			   PT_REGS_PARM1(ctx), 0);
 }
 
@@ -526,14 +541,14 @@ int uprobe_evp_digestsign_init(struct pt_regs *ctx)
 {
 	/* EVP_DigestSignInit(mdctx, pctx, md, engine, pkey): the EVP_MD_CTX
 	 * carries no name, but the key (arg 5) may be known from pkey_alg_map. */
-	return emit_crypto("EVP_DigestSignInit", LIBCRYPTO_PATH, OP_SIGN, 0,
+	return emit_crypto("EVP_DigestSignInit", crypto_lib(ctx), OP_SIGN, 0,
 			   PT_REGS_PARM5(ctx));
 }
 
 SEC("uprobe")
 int uprobe_evp_digestverify_init(struct pt_regs *ctx)
 {
-	return emit_crypto("EVP_DigestVerifyInit", LIBCRYPTO_PATH, OP_VERIFY, 0,
+	return emit_crypto("EVP_DigestVerifyInit", crypto_lib(ctx), OP_VERIFY, 0,
 			   PT_REGS_PARM5(ctx));
 }
 
@@ -548,14 +563,14 @@ SEC("uprobe")
 int uprobe_evp_digestsign_init_ex(struct pt_regs *ctx)
 {
 	/* EVP_DigestSignInit_ex(mdctx, pctx, mdname, libctx, propq, pkey, params) */
-	return emit_crypto("EVP_DigestSignInit_ex", LIBCRYPTO_PATH, OP_SIGN, 0,
+	return emit_crypto("EVP_DigestSignInit_ex", crypto_lib(ctx), OP_SIGN, 0,
 			   PT_REGS_PARM6(ctx));
 }
 
 SEC("uprobe")
 int uprobe_evp_digestverify_init_ex(struct pt_regs *ctx)
 {
-	return emit_crypto("EVP_DigestVerifyInit_ex", LIBCRYPTO_PATH, OP_VERIFY, 0,
+	return emit_crypto("EVP_DigestVerifyInit_ex", crypto_lib(ctx), OP_VERIFY, 0,
 			   PT_REGS_PARM6(ctx));
 }
 
@@ -564,7 +579,8 @@ int uprobe_evp_digestverify_init_ex(struct pt_regs *ctx)
 /* ------------------------------------------------------------------ */
 
 /* OpenSSL 3 keygen uses RAND_priv_bytes_ex, not RAND_bytes. */
-static __always_inline int emit_random_api(const char *api, __u32 num)
+static __always_inline int emit_random_api(const char *api, const char *lib,
+					   __u32 num)
 {
 	struct crypto_event *e = bpf_ringbuf_reserve(&events, sizeof(*e), 0);
 	__u32 key;
@@ -587,7 +603,7 @@ static __always_inline int emit_random_api(const char *api, __u32 num)
 	e->event_type = EVENT_RANDOM;
 	e->timestamp_ns = val.ts_ns;
 	__builtin_memcpy(e->api, api, 32);
-	__builtin_memcpy(e->library, LIBCRYPTO_PATH, 64);
+	__builtin_memcpy(e->library, lib, 64);
 	e->random_bytes = num;
 
 	bpf_ringbuf_submit(e, 0);
@@ -598,28 +614,28 @@ SEC("uprobe")
 int uprobe_rand_bytes(struct pt_regs *ctx)
 {
 	/* RAND_bytes(buf, num) — num = arg2 */
-	return emit_random_api("RAND_bytes", (__u32)PT_REGS_PARM2(ctx));
+	return emit_random_api("RAND_bytes", crypto_lib(ctx), (__u32)PT_REGS_PARM2(ctx));
 }
 
 SEC("uprobe")
 int uprobe_rand_bytes_ex(struct pt_regs *ctx)
 {
 	/* RAND_bytes_ex(ctx, buf, num, strength) — num = arg3 */
-	return emit_random_api("RAND_bytes_ex", (__u32)PT_REGS_PARM3(ctx));
+	return emit_random_api("RAND_bytes_ex", crypto_lib(ctx), (__u32)PT_REGS_PARM3(ctx));
 }
 
 SEC("uprobe")
 int uprobe_rand_priv_bytes(struct pt_regs *ctx)
 {
 	/* RAND_priv_bytes(buf, num) — num = arg2 */
-	return emit_random_api("RAND_priv_bytes", (__u32)PT_REGS_PARM2(ctx));
+	return emit_random_api("RAND_priv_bytes", crypto_lib(ctx), (__u32)PT_REGS_PARM2(ctx));
 }
 
 SEC("uprobe")
 int uprobe_rand_priv_bytes_ex(struct pt_regs *ctx)
 {
 	/* RAND_priv_bytes_ex(ctx, buf, num, strength) — num = arg3 */
-	return emit_random_api("RAND_priv_bytes_ex", (__u32)PT_REGS_PARM3(ctx));
+	return emit_random_api("RAND_priv_bytes_ex", crypto_lib(ctx), (__u32)PT_REGS_PARM3(ctx));
 }
 
 /* ------------------------------------------------------------------ */

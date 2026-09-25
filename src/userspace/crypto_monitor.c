@@ -232,13 +232,17 @@ static void write_stats(const struct monitor_config *cfg)
 }
 
 static int attach_uprobe(struct bpf_object *obj, const char *prog_name,
-			 const char *lib, const char *sym, bool retprobe)
+			 const char *lib, const char *sym, bool retprobe,
+			 __u64 cookie)
 {
 	struct bpf_program *prog;
 	struct bpf_link *link;
+	/* The cookie tells the BPF side which library a shared program fired
+	 * in (libcrypto index: 0 = OpenSSL 3, 1 = OpenSSL 1.1). */
 	LIBBPF_OPTS(bpf_uprobe_opts, opts,
 		    .func_name = sym,
 		    .retprobe = retprobe,
+		    .bpf_cookie = cookie,
 	);
 
 	prog = bpf_object__find_program_by_name(obj, prog_name);
@@ -261,6 +265,8 @@ static int attach_uprobe(struct bpf_object *obj, const char *prog_name,
 
 static int attach_all(struct bpf_object *obj)
 {
+	/* The index is passed as the attach cookie; the BPF side maps it back to
+	 * the path (crypto_lib(), LIBCRYPTO_COOKIE_11), so keep the order. */
 	const char *crypto_libs[] = {
 		"/usr/lib/x86_64-linux-gnu/libcrypto.so.3",
 		"/usr/lib/x86_64-linux-gnu/libcrypto.so.1.1",
@@ -339,17 +345,17 @@ static int attach_all(struct bpf_object *obj)
 			for (size_t li = 0; crypto_libs[li]; li++) {
 				if (access(crypto_libs[li], R_OK) == 0)
 					attach_uprobe(obj, probes[i].prog, crypto_libs[li],
-						      probes[i].sym, probes[i].ret);
+						      probes[i].sym, probes[i].ret, li);
 			}
 		} else if (probes[i].type == P_OQS) {
 			if (access(oqs_lib, R_OK) == 0)
 				attach_uprobe(obj, probes[i].prog, oqs_lib,
-					      probes[i].sym, probes[i].ret);
+					      probes[i].sym, probes[i].ret, 0);
 		} else if (probes[i].type == P_TSS2) {
 			for (size_t ti = 0; tss2_paths[ti]; ti++) {
 				if (access(tss2_paths[ti], R_OK) == 0)
 					attach_uprobe(obj, probes[i].prog, tss2_paths[ti],
-						      probes[i].sym, probes[i].ret);
+						      probes[i].sym, probes[i].ret, 0);
 			}
 		}
 	}
