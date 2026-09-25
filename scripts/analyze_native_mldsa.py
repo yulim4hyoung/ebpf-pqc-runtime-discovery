@@ -9,11 +9,13 @@ writes results/native-mldsa/summary.md plus summary.json.
 from __future__ import annotations
 
 import json
+import os
 from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "results" / "native-mldsa"
+# OUT_DIR (default "results") lets a validation run write elsewhere.
+OUT = ROOT / os.environ.get("OUT_DIR", "results") / "native-mldsa"
 
 CASES = {
     "native_evp": {"procs": {"mldsa-native"}},

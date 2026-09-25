@@ -1,0 +1,9 @@
+# OpenSSL 3.5.5 27 Jan 2026 (Library: OpenSSL 3.5.5 27 Jan 2026)
+$ /hostssl/openssl genpkey -algorithm ML-DSA-65 -out /tmp/mldsa_cli.pem
+rc=0
+$ /hostssl/openssl pkeyutl -sign -inkey /tmp/mldsa_cli.pem -rawin -in /tmp/mldsa_cli_msg.txt -out /tmp/mldsa_cli_sig.bin
+rc=0
+signature size: 3309 bytes
+$ /hostssl/openssl pkeyutl -verify -inkey /tmp/mldsa_cli.pem -rawin -in /tmp/mldsa_cli_msg.txt -sigfile /tmp/mldsa_cli_sig.bin
+Signature Verified Successfully
+rc=0

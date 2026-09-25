@@ -1,0 +1,3 @@
+[workload] native ML-KEM-512 keygen+encaps+decaps OK (ct=768 ss=32)
+[workload] native ML-KEM-768 keygen+encaps+decaps OK (ct=1088 ss=32)
+[workload] native ML-KEM-1024 keygen+encaps+decaps OK (ct=1568 ss=32)

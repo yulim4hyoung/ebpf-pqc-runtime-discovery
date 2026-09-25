@@ -47,6 +47,7 @@ docker run --rm --privileged --pid=host \
   -v /sys/kernel/btf:/sys/kernel/btf:ro \
   -v /sys/fs/bpf:/sys/fs/bpf \
   "${TRACEFS_MOUNT[@]}" \
+  -e OUT_DIR="${OUT_DIR:-results}" \
   -w /work "$IMAGE" bash -c '
     set -euo pipefail
     export DEBIAN_FRONTEND=noninteractive
@@ -65,7 +66,8 @@ docker run --rm --privileged --pid=host \
       *) echo "host openssl command is $HV, need >= 3.5" >&2; exit 1 ;;
     esac
 
-    mkdir -p results/native-mldsa results/logs
+    R="${OUT_DIR:-results}"
+    mkdir -p "$R/native-mldsa" "$R/logs"
 
     gcc -Wall -O2 -I/hostssl/include -I/hostssl/include-arch \
       -o /tmp/mldsa-native workloads/openssl_native/mldsa_native_workload.c -lcrypto
@@ -81,12 +83,12 @@ docker run --rm --privileged --pid=host \
     }
     start_mon() {
       name="$1"
-      rm -f "results/native-mldsa/${name}.jsonl"
-      ./build/crypto-monitor -o "results/native-mldsa/${name}.jsonl" \
-        -S "results/native-mldsa/${name}_stats.json" -p 1 -d 40 \
-        2> "results/logs/native_mldsa_${name}.log" &
+      rm -f "$R/native-mldsa/${name}.jsonl"
+      ./build/crypto-monitor -o "$R/native-mldsa/${name}.jsonl" \
+        -S "$R/native-mldsa/${name}_stats.json" -p 1 -d 40 \
+        2> "$R/logs/native_mldsa_${name}.log" &
       MON=$!
-      wait_ready "results/logs/native_mldsa_${name}.log"
+      wait_ready "$R/logs/native_mldsa_${name}.log"
     }
     stop_mon() {
       sleep 1
@@ -103,7 +105,7 @@ docker run --rm --privileged --pid=host \
 
     run_case() {  # run_case <name> <cmd...>
       name="$1"; shift
-      cmdlog="results/logs/native_mldsa_${name}_cmd.log"
+      cmdlog="$R/logs/native_mldsa_${name}_cmd.log"
       : > "$cmdlog"
       start_mon "$name"
       logged "$cmdlog" "$@"
@@ -112,7 +114,7 @@ docker run --rm --privileged --pid=host \
     }
 
     run_native_cli() {
-      cmdlog="results/logs/native_mldsa_native_cli_cmd.log"
+      cmdlog="$R/logs/native_mldsa_native_cli_cmd.log"
       : > "$cmdlog"
       echo "# $(/hostssl/openssl version)" >> "$cmdlog"
       printf "runtime-pqc-discovery ML-DSA cli test\n" > /tmp/mldsa_cli_msg.txt
@@ -132,7 +134,7 @@ docker run --rm --privileged --pid=host \
     run_case liboqs /tmp/mldsa_workload
 
     python3 scripts/analyze_native_mldsa.py
-    chown -R "$(stat -c %u:%g /work/results)" results/native-mldsa results/logs 2>/dev/null || true
+    chown -R "$(stat -c %u:%g /work)" "$R/native-mldsa" "$R/logs" 2>/dev/null || true
   '
 
-echo "Results: $ROOT/results/native-mldsa/"
+echo "Results: $ROOT/${OUT_DIR:-results}/native-mldsa/"

@@ -132,7 +132,7 @@ struct {
 		__u64 ts_ns;
 		__u32 bytes;
 	});
-} last_random SEC(".maps");
+} last_random SEC(".maps");	/* key: process id (pid_tgid >> 32) */
 
 struct {
 	__uint(type, BPF_MAP_TYPE_RINGBUF);
@@ -184,6 +184,9 @@ static __always_inline void fill_process(struct crypto_event *e)
 	__u64 pid_tgid = bpf_get_current_pid_tgid();
 
 	e->timestamp_ns = bpf_ktime_get_ns();
+	/* e->pid is the process id (the kernel's tgid); e->tgid carries the
+	 * thread id despite its name. The JSON field names are kept as they
+	 * are for compatibility with the recorded results. */
 	e->pid = pid_tgid >> 32;
 	e->tgid = (__u32)pid_tgid;
 	e->uid = bpf_get_current_uid_gid() & 0xffffffff;
@@ -192,7 +195,10 @@ static __always_inline void fill_process(struct crypto_event *e)
 
 static __always_inline void apply_random_corr(struct crypto_event *e)
 {
-	__u32 key = e->tgid;
+	/* Correlate per process, as the paper describes: a draw made by one
+	 * thread anchors a cryptographic call made by another thread of the
+	 * same process. (Earlier builds keyed by thread id.) */
+	__u32 key = e->pid;
 	struct {
 		__u64 ts_ns;
 		__u32 bytes;
@@ -590,7 +596,7 @@ static __always_inline int emit_random_api(const char *api, const char *lib,
 	} val;
 
 	/* Always refresh correlation map even if ringbuf is full. */
-	key = (__u32)bpf_get_current_pid_tgid();
+	key = cur_pid();
 	val.ts_ns = bpf_ktime_get_ns();
 	val.bytes = num;
 	bpf_map_update_elem(&last_random, &key, &val, BPF_ANY);
@@ -801,7 +807,7 @@ int trace_getrandom(struct trace_event_raw_sys_enter *ctx)
 	__builtin_memcpy(e->api, "getrandom", 16);
 	e->random_bytes = (__u32)args;
 
-	key = e->tgid;
+	key = e->pid;
 	val.ts_ns = e->timestamp_ns;
 	val.bytes = e->random_bytes;
 	bpf_map_update_elem(&last_random, &key, &val, BPF_ANY);
