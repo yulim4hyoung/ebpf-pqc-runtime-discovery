@@ -1,0 +1,3640 @@
+{
+  "repeat": 10,
+  "D_random (random alone)": {
+    "TP": 60,
+    "TN": 30,
+    "FP": 0,
+    "FN": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "D_api (crypto API)": {
+    "TP": 60,
+    "TN": 30,
+    "FP": 0,
+    "FN": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "D_corr (API + random correlation)": {
+    "TP": 60,
+    "TN": 30,
+    "FP": 0,
+    "FN": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "workloads": [
+    {
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "repeats": 10,
+      "detector": "D_api",
+      "detection_rate": 1.0,
+      "api_events_total": 10,
+      "name_attribution_rate": 1.0,
+      "anchor_rate": 1.0,
+      "delta_us_median": 1729.0,
+      "delta_us_max": 2037,
+      "confidence_min": 1.0,
+      "confidence_max": 1.0
+    },
+    {
+      "workload": "pos_ec",
+      "label": "crypto",
+      "repeats": 10,
+      "detector": "D_api",
+      "detection_rate": 1.0,
+      "api_events_total": 10,
+      "name_attribution_rate": 1.0,
+      "anchor_rate": 1.0,
+      "delta_us_median": 88.0,
+      "delta_us_max": 383,
+      "confidence_min": 1.0,
+      "confidence_max": 1.0
+    },
+    {
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "repeats": 10,
+      "detector": "D_api",
+      "detection_rate": 1.0,
+      "api_events_total": 10,
+      "name_attribution_rate": 1.0,
+      "anchor_rate": 1.0,
+      "delta_us_median": 85.0,
+      "delta_us_max": 92,
+      "confidence_min": 1.0,
+      "confidence_max": 1.0
+    },
+    {
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "repeats": 10,
+      "detector": "D_api",
+      "detection_rate": 1.0,
+      "api_events_total": 30,
+      "name_attribution_rate": 1.0,
+      "anchor_rate": 1.0,
+      "delta_us_median": 53.0,
+      "delta_us_max": 1343,
+      "confidence_min": 1.0,
+      "confidence_max": 1.0
+    },
+    {
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "repeats": 10,
+      "detector": "D_api",
+      "detection_rate": 1.0,
+      "api_events_total": 30,
+      "name_attribution_rate": 1.0,
+      "anchor_rate": 1.0,
+      "delta_us_median": 59.5,
+      "delta_us_max": 106,
+      "confidence_min": 1.0,
+      "confidence_max": 1.0
+    },
+    {
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "repeats": 10,
+      "detector": "D_api",
+      "detection_rate": 1.0,
+      "api_events_total": 30,
+      "name_attribution_rate": 1.0,
+      "anchor_rate": 1.0,
+      "delta_us_median": 57.5,
+      "delta_us_max": 973,
+      "confidence_min": 1.0,
+      "confidence_max": 1.0
+    },
+    {
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "repeats": 10,
+      "detector": "D_random",
+      "detection_rate": 0.0,
+      "api_events_total": 0,
+      "name_attribution_rate": null,
+      "anchor_rate": null,
+      "delta_us_median": null,
+      "delta_us_max": null,
+      "confidence_min": null,
+      "confidence_max": null
+    },
+    {
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "repeats": 10,
+      "detector": "D_random",
+      "detection_rate": 0.0,
+      "api_events_total": 0,
+      "name_attribution_rate": null,
+      "anchor_rate": null,
+      "delta_us_median": null,
+      "delta_us_max": null,
+      "confidence_min": null,
+      "confidence_max": null
+    },
+    {
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "repeats": 10,
+      "detector": "D_random",
+      "detection_rate": 0.0,
+      "api_events_total": 0,
+      "name_attribution_rate": null,
+      "anchor_rate": null,
+      "delta_us_median": null,
+      "delta_us_max": null,
+      "confidence_min": null,
+      "confidence_max": null
+    }
+  ],
+  "cases": [
+    {
+      "id": "pos_rsa_r01",
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 663,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 662,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        1641
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "RSA"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 1641,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_ec_r01",
+      "workload": "pos_ec",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        88
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "EC"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "EC",
+          "random_delta_us": 88,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_x25519_r01",
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        84
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "X25519"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "X25519",
+          "random_delta_us": 84,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem512_r01",
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        1315,
+        1343,
+        18
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-512"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 1315,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 1343,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 18,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem768_r01",
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        68,
+        96,
+        14
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-768"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 68,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 96,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 14,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem1024_r01",
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        57,
+        134,
+        21
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-1024"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 57,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 134,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 21,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom_r01",
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom_r01",
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid_r01",
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "pos_rsa_r02",
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 530,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 529,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        1852
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "RSA"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 1852,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_ec_r02",
+      "workload": "pos_ec",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        107
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "EC"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "EC",
+          "random_delta_us": 107,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_x25519_r02",
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        85
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "X25519"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "X25519",
+          "random_delta_us": 85,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem512_r02",
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        79,
+        106,
+        17
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-512"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 79,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 106,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 17,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem768_r02",
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        80,
+        106,
+        21
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-768"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 80,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 106,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 21,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem1024_r02",
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        946,
+        973,
+        16
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-1024"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 946,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 973,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 16,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom_r02",
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom_r02",
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid_r02",
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "pos_rsa_r03",
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 629,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 628,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        2037
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "RSA"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 2037,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_ec_r03",
+      "workload": "pos_ec",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        383
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "EC"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "EC",
+          "random_delta_us": 383,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_x25519_r03",
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        85
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "X25519"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "X25519",
+          "random_delta_us": 85,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem512_r03",
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        52,
+        80,
+        16
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-512"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 52,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 80,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 16,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem768_r03",
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        55,
+        82,
+        18
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-768"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 55,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 82,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 18,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem1024_r03",
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        57,
+        84,
+        41
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-1024"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 57,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 84,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 41,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom_r03",
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom_r03",
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid_r03",
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "pos_rsa_r04",
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 581,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 580,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        1805
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "RSA"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 1805,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_ec_r04",
+      "workload": "pos_ec",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        85
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "EC"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "EC",
+          "random_delta_us": 85,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_x25519_r04",
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        87
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "X25519"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "X25519",
+          "random_delta_us": 87,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem512_r04",
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        52,
+        79,
+        12
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-512"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 52,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 79,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 12,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem768_r04",
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        55,
+        81,
+        15
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-768"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 55,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 81,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 15,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem1024_r04",
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        59,
+        86,
+        20
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-1024"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 59,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 86,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 20,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom_r04",
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom_r04",
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid_r04",
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "pos_rsa_r05",
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 632,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 631,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        1801
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "RSA"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 1801,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_ec_r05",
+      "workload": "pos_ec",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        89
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "EC"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "EC",
+          "random_delta_us": 89,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_x25519_r05",
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        88
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "X25519"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "X25519",
+          "random_delta_us": 88,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem512_r05",
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        52,
+        79,
+        16
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-512"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 52,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 79,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 16,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem768_r05",
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        56,
+        83,
+        18
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-768"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 56,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 83,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 18,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem1024_r05",
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        106,
+        133,
+        21
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-1024"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 106,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 133,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 21,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom_r05",
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom_r05",
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid_r05",
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "pos_rsa_r06",
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 645,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 644,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        1636
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "RSA"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 1636,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_ec_r06",
+      "workload": "pos_ec",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        86
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "EC"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "EC",
+          "random_delta_us": 86,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_x25519_r06",
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        64
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "X25519"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "X25519",
+          "random_delta_us": 64,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem512_r06",
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        54,
+        81,
+        16
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-512"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 54,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 81,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 16,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem768_r06",
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        55,
+        82,
+        18
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-768"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 55,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 82,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 18,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem1024_r06",
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        59,
+        86,
+        16
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-1024"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 59,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 86,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 16,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom_r06",
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom_r06",
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid_r06",
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "pos_rsa_r07",
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 670,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 669,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        1652
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "RSA"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 1652,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_ec_r07",
+      "workload": "pos_ec",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        82
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "EC"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "EC",
+          "random_delta_us": 82,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_x25519_r07",
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        87
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "X25519"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "X25519",
+          "random_delta_us": 87,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem512_r07",
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        87,
+        114,
+        16
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-512"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 87,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 114,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 16,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem768_r07",
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        56,
+        82,
+        21
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-768"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 56,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 82,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 21,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem1024_r07",
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        56,
+        82,
+        20
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-1024"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 56,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 82,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 20,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom_r07",
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom_r07",
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid_r07",
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "pos_rsa_r08",
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 531,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 530,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        1657
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "RSA"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 1657,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_ec_r08",
+      "workload": "pos_ec",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        85
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "EC"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "EC",
+          "random_delta_us": 85,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_x25519_r08",
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        85
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "X25519"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "X25519",
+          "random_delta_us": 85,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem512_r08",
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        69,
+        96,
+        16
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-512"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 69,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 96,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 16,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem768_r08",
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        63,
+        87,
+        16
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-768"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 63,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 87,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 16,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem1024_r08",
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        58,
+        85,
+        20
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-1024"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 58,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 85,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 20,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom_r08",
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom_r08",
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid_r08",
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "pos_rsa_r09",
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 650,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 649,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        1657
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "RSA"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 1657,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_ec_r09",
+      "workload": "pos_ec",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        91
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "EC"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "EC",
+          "random_delta_us": 91,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_x25519_r09",
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        92
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "X25519"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "X25519",
+          "random_delta_us": 92,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem512_r09",
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        51,
+        78,
+        17
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-512"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 51,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 78,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 17,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem768_r09",
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        70,
+        97,
+        18
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-768"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 70,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 97,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 18,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem1024_r09",
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        56,
+        84,
+        20
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-1024"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 56,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 84,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 20,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom_r09",
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom_r09",
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid_r09",
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "pos_rsa_r10",
+      "workload": "pos_rsa",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 521,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 520,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        1802
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "RSA"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "RSA",
+          "random_delta_us": 1802,
+          "random_bytes": 128
+        }
+      ]
+    },
+    {
+      "id": "pos_ec_r10",
+      "workload": "pos_ec",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        88
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "EC"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "EC",
+          "random_delta_us": 88,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_x25519_r10",
+      "workload": "pos_x25519",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 2,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 1,
+      "api_count": 1,
+      "corr_count": 1,
+      "named_count": 1,
+      "corr_deltas_us": [
+        85
+      ],
+      "confidences": [
+        1.0
+      ],
+      "apis": [
+        "EVP_PKEY_keygen",
+        "RAND_priv_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_priv_bytes_ex"
+      ],
+      "algorithms": [
+        "X25519"
+      ],
+      "corr_sample": [
+        {
+          "api": "EVP_PKEY_keygen",
+          "algorithm": "X25519",
+          "random_delta_us": 85,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem512_r10",
+      "workload": "pos_mlkem512",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        52,
+        79,
+        14
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-512"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 52,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 79,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-512",
+          "random_delta_us": 14,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem768_r10",
+      "workload": "pos_mlkem768",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        67,
+        94,
+        18
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-768"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 67,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 94,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-768",
+          "random_delta_us": 18,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "pos_mlkem1024_r10",
+      "workload": "pos_mlkem1024",
+      "label": "crypto",
+      "expected_crypto": true,
+      "n_events": 7,
+      "D_random": true,
+      "D_api": true,
+      "D_corr": true,
+      "random_count": 4,
+      "api_count": 3,
+      "corr_count": 3,
+      "named_count": 3,
+      "corr_deltas_us": [
+        56,
+        83,
+        20
+      ],
+      "confidences": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "apis": [
+        "OQS_KEM_decaps",
+        "OQS_KEM_encaps",
+        "OQS_KEM_keypair",
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "random_apis": [
+        "RAND_bytes",
+        "RAND_bytes_ex"
+      ],
+      "algorithms": [
+        "ML-KEM-1024"
+      ],
+      "corr_sample": [
+        {
+          "api": "OQS_KEM_keypair",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 56,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_encaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 83,
+          "random_bytes": 64
+        },
+        {
+          "api": "OQS_KEM_decaps",
+          "algorithm": "ML-KEM-1024",
+          "random_delta_us": 20,
+          "random_bytes": 32
+        }
+      ]
+    },
+    {
+      "id": "neg_getrandom_r10",
+      "workload": "neg_getrandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_urandom_r10",
+      "workload": "neg_urandom",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    },
+    {
+      "id": "neg_uuid_r10",
+      "workload": "neg_uuid",
+      "label": "random_only",
+      "expected_crypto": false,
+      "n_events": 0,
+      "D_random": false,
+      "D_api": false,
+      "D_corr": false,
+      "random_count": 0,
+      "api_count": 0,
+      "corr_count": 0,
+      "named_count": 0,
+      "corr_deltas_us": [],
+      "confidences": [],
+      "apis": [],
+      "random_apis": [],
+      "algorithms": [],
+      "corr_sample": []
+    }
+  ]
+}

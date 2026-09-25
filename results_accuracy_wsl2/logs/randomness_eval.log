@@ -1,0 +1,304 @@
+[+] pos_rsa_r01
+  monitor ready after 0.2 s
+[+] pos_ec_r01
+  monitor ready after 0.1 s
+[+] pos_x25519_r01
+  monitor ready after 0.1 s
+[+] pos_mlkem512_r01
+  monitor ready after 0.1 s
+[+] pos_mlkem768_r01
+  monitor ready after 0.1 s
+[+] pos_mlkem1024_r01
+  monitor ready after 0.1 s
+[-] neg_getrandom_r01
+  monitor ready after 0.1 s
+[-] neg_urandom_r01
+  monitor ready after 0.1 s
+[-] neg_uuid_r01
+  monitor ready after 0.1 s
+[+] pos_rsa_r02
+  monitor ready after 0.1 s
+[+] pos_ec_r02
+  monitor ready after 0.1 s
+[+] pos_x25519_r02
+  monitor ready after 0.1 s
+[+] pos_mlkem512_r02
+  monitor ready after 0.1 s
+[+] pos_mlkem768_r02
+  monitor ready after 0.1 s
+[+] pos_mlkem1024_r02
+  monitor ready after 0.1 s
+[-] neg_getrandom_r02
+  monitor ready after 0.1 s
+[-] neg_urandom_r02
+  monitor ready after 0.1 s
+[-] neg_uuid_r02
+  monitor ready after 0.1 s
+[+] pos_rsa_r03
+  monitor ready after 0.1 s
+[+] pos_ec_r03
+  monitor ready after 0.1 s
+[+] pos_x25519_r03
+  monitor ready after 0.1 s
+[+] pos_mlkem512_r03
+  monitor ready after 0.1 s
+[+] pos_mlkem768_r03
+  monitor ready after 0.1 s
+[+] pos_mlkem1024_r03
+  monitor ready after 0.1 s
+[-] neg_getrandom_r03
+  monitor ready after 0.1 s
+[-] neg_urandom_r03
+  monitor ready after 0.1 s
+[-] neg_uuid_r03
+  monitor ready after 0.1 s
+[+] pos_rsa_r04
+  monitor ready after 0.1 s
+[+] pos_ec_r04
+  monitor ready after 0.1 s
+[+] pos_x25519_r04
+  monitor ready after 0.1 s
+[+] pos_mlkem512_r04
+  monitor ready after 0.1 s
+[+] pos_mlkem768_r04
+  monitor ready after 0.1 s
+[+] pos_mlkem1024_r04
+  monitor ready after 0.1 s
+[-] neg_getrandom_r04
+  monitor ready after 0.1 s
+[-] neg_urandom_r04
+  monitor ready after 0.1 s
+[-] neg_uuid_r04
+  monitor ready after 0.1 s
+[+] pos_rsa_r05
+  monitor ready after 0.1 s
+[+] pos_ec_r05
+  monitor ready after 0.1 s
+[+] pos_x25519_r05
+  monitor ready after 0.1 s
+[+] pos_mlkem512_r05
+  monitor ready after 0.1 s
+[+] pos_mlkem768_r05
+  monitor ready after 0.1 s
+[+] pos_mlkem1024_r05
+  monitor ready after 0.1 s
+[-] neg_getrandom_r05
+  monitor ready after 0.1 s
+[-] neg_urandom_r05
+  monitor ready after 0.1 s
+[-] neg_uuid_r05
+  monitor ready after 0.1 s
+[+] pos_rsa_r06
+  monitor ready after 0.1 s
+[+] pos_ec_r06
+  monitor ready after 0.1 s
+[+] pos_x25519_r06
+  monitor ready after 0.1 s
+[+] pos_mlkem512_r06
+  monitor ready after 0.1 s
+[+] pos_mlkem768_r06
+  monitor ready after 0.1 s
+[+] pos_mlkem1024_r06
+  monitor ready after 0.1 s
+[-] neg_getrandom_r06
+  monitor ready after 0.1 s
+[-] neg_urandom_r06
+  monitor ready after 0.1 s
+[-] neg_uuid_r06
+  monitor ready after 0.1 s
+[+] pos_rsa_r07
+  monitor ready after 0.1 s
+[+] pos_ec_r07
+  monitor ready after 0.1 s
+[+] pos_x25519_r07
+  monitor ready after 0.1 s
+[+] pos_mlkem512_r07
+  monitor ready after 0.1 s
+[+] pos_mlkem768_r07
+  monitor ready after 0.1 s
+[+] pos_mlkem1024_r07
+  monitor ready after 0.1 s
+[-] neg_getrandom_r07
+  monitor ready after 0.1 s
+[-] neg_urandom_r07
+  monitor ready after 0.1 s
+[-] neg_uuid_r07
+  monitor ready after 0.1 s
+[+] pos_rsa_r08
+  monitor ready after 0.1 s
+[+] pos_ec_r08
+  monitor ready after 0.1 s
+[+] pos_x25519_r08
+  monitor ready after 0.1 s
+[+] pos_mlkem512_r08
+  monitor ready after 0.1 s
+[+] pos_mlkem768_r08
+  monitor ready after 0.1 s
+[+] pos_mlkem1024_r08
+  monitor ready after 0.1 s
+[-] neg_getrandom_r08
+  monitor ready after 0.1 s
+[-] neg_urandom_r08
+  monitor ready after 0.1 s
+[-] neg_uuid_r08
+  monitor ready after 0.1 s
+[+] pos_rsa_r09
+  monitor ready after 0.1 s
+[+] pos_ec_r09
+  monitor ready after 0.1 s
+[+] pos_x25519_r09
+  monitor ready after 0.1 s
+[+] pos_mlkem512_r09
+  monitor ready after 0.1 s
+[+] pos_mlkem768_r09
+  monitor ready after 0.1 s
+[+] pos_mlkem1024_r09
+  monitor ready after 0.1 s
+[-] neg_getrandom_r09
+  monitor ready after 0.1 s
+[-] neg_urandom_r09
+  monitor ready after 0.1 s
+[-] neg_uuid_r09
+  monitor ready after 0.1 s
+[+] pos_rsa_r10
+  monitor ready after 0.1 s
+[+] pos_ec_r10
+  monitor ready after 0.1 s
+[+] pos_x25519_r10
+  monitor ready after 0.1 s
+[+] pos_mlkem512_r10
+  monitor ready after 0.1 s
+[+] pos_mlkem768_r10
+  monitor ready after 0.1 s
+[+] pos_mlkem1024_r10
+  monitor ready after 0.1 s
+[-] neg_getrandom_r10
+  monitor ready after 0.1 s
+[-] neg_urandom_r10
+  monitor ready after 0.1 s
+[-] neg_uuid_r10
+  monitor ready after 0.1 s
+# Randomness detector evaluation
+
+Repeats: 10  |  Processes scored: 90
+
+| Detector | Precision | Recall | F1 | TP | FP | FN |
+|---|---:|---:|---:|---:|---:|---:|
+| D_random (random alone) | 1.00 | 1.00 | 1.00 | 60 | 0 | 0 |
+| D_api (crypto API) | 1.00 | 1.00 | 1.00 | 60 | 0 | 0 |
+| D_corr (API + random correlation) | 1.00 | 1.00 | 1.00 | 60 | 0 | 0 |
+
+## Per-workload
+
+| Workload | Label | Reps | Det.rate | Name attr. | Anchor | Δt med (μs) | Δt max | Conf |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| pos_rsa | crypto | 10 | 100% | 100% | 100% | 1729 | 2037 | 1.0-1.0 |
+| pos_ec | crypto | 10 | 100% | 100% | 100% | 88 | 383 | 1.0-1.0 |
+| pos_x25519 | crypto | 10 | 100% | 100% | 100% | 85 | 92 | 1.0-1.0 |
+| pos_mlkem512 | crypto | 10 | 100% | 100% | 100% | 53 | 1343 | 1.0-1.0 |
+| pos_mlkem768 | crypto | 10 | 100% | 100% | 100% | 60 | 106 | 1.0-1.0 |
+| pos_mlkem1024 | crypto | 10 | 100% | 100% | 100% | 58 | 973 | 1.0-1.0 |
+| neg_getrandom | random_only | 10 | 0% | - | - | - | - | - |
+| neg_urandom | random_only | 10 | 0% | - | - | - | - | - |
+| neg_uuid | random_only | 10 | 0% | - | - | - | - | - |
+
+## Per-case
+
+| Case | Label | D_random | D_api | D_corr | APIs |
+|---|---|---|---|---|---|
+| pos_rsa_r01 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_ec_r01 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_x25519_r01 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem512_r01 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem768_r01 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem1024_r01 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom_r01 | random_only | False | False | False |  |
+| neg_urandom_r01 | random_only | False | False | False |  |
+| neg_uuid_r01 | random_only | False | False | False |  |
+| pos_rsa_r02 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_ec_r02 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_x25519_r02 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem512_r02 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem768_r02 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem1024_r02 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom_r02 | random_only | False | False | False |  |
+| neg_urandom_r02 | random_only | False | False | False |  |
+| neg_uuid_r02 | random_only | False | False | False |  |
+| pos_rsa_r03 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_ec_r03 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_x25519_r03 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem512_r03 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem768_r03 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem1024_r03 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom_r03 | random_only | False | False | False |  |
+| neg_urandom_r03 | random_only | False | False | False |  |
+| neg_uuid_r03 | random_only | False | False | False |  |
+| pos_rsa_r04 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_ec_r04 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_x25519_r04 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem512_r04 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem768_r04 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem1024_r04 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom_r04 | random_only | False | False | False |  |
+| neg_urandom_r04 | random_only | False | False | False |  |
+| neg_uuid_r04 | random_only | False | False | False |  |
+| pos_rsa_r05 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_ec_r05 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_x25519_r05 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem512_r05 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem768_r05 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem1024_r05 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom_r05 | random_only | False | False | False |  |
+| neg_urandom_r05 | random_only | False | False | False |  |
+| neg_uuid_r05 | random_only | False | False | False |  |
+| pos_rsa_r06 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_ec_r06 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_x25519_r06 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem512_r06 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem768_r06 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem1024_r06 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom_r06 | random_only | False | False | False |  |
+| neg_urandom_r06 | random_only | False | False | False |  |
+| neg_uuid_r06 | random_only | False | False | False |  |
+| pos_rsa_r07 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_ec_r07 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_x25519_r07 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem512_r07 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem768_r07 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem1024_r07 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom_r07 | random_only | False | False | False |  |
+| neg_urandom_r07 | random_only | False | False | False |  |
+| neg_uuid_r07 | random_only | False | False | False |  |
+| pos_rsa_r08 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_ec_r08 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_x25519_r08 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem512_r08 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem768_r08 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem1024_r08 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom_r08 | random_only | False | False | False |  |
+| neg_urandom_r08 | random_only | False | False | False |  |
+| neg_uuid_r08 | random_only | False | False | False |  |
+| pos_rsa_r09 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_ec_r09 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_x25519_r09 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem512_r09 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem768_r09 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem1024_r09 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom_r09 | random_only | False | False | False |  |
+| neg_urandom_r09 | random_only | False | False | False |  |
+| neg_uuid_r09 | random_only | False | False | False |  |
+| pos_rsa_r10 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_ec_r10 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_x25519_r10 | crypto | True | True | True | EVP_PKEY_keygen, RAND_priv_bytes_ex |
+| pos_mlkem512_r10 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem768_r10 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| pos_mlkem1024_r10 | crypto | True | True | True | OQS_KEM_decaps, OQS_KEM_encaps, OQS_KEM_keypair, RAND_bytes, RAND_bytes_ex |
+| neg_getrandom_r10 | random_only | False | False | False |  |
+| neg_urandom_r10 | random_only | False | False | False |  |
+| neg_uuid_r10 | random_only | False | False | False |  |
+
+## Interpretation
+- **D_random alone is NOT a valid crypto detector** — negatives that call getrandom become FPs.
+- **D_api** is the primary detector.
+- **D_corr** raises confidence when randomness precedes a crypto API; it does not invent detections.
+

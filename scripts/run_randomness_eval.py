@@ -83,6 +83,11 @@ def score(rows: list[dict], procs: set[str] | None = None) -> dict:
     api_hits = [e for e in api_hits if e.get("api") != "Esys_GetRandom"]
     corr = [e for e in api_hits if e.get("randomness_recently_observed")]
     rand_apis = sorted(set(e.get("api", "") for e in random_hits))
+    # Per-event detail kept for the workload-level report (name attribution,
+    # anchor delta, confidence distribution).
+    named = [e for e in api_hits if e.get("algorithm")]
+    deltas = [e.get("random_delta_us") for e in corr if e.get("random_delta_us") is not None]
+    confs = [e.get("confidence") for e in api_hits if e.get("confidence") is not None]
     return {
         "n_events": len(rows),
         "D_random": len(random_hits) > 0,
@@ -91,8 +96,12 @@ def score(rows: list[dict], procs: set[str] | None = None) -> dict:
         "random_count": len(random_hits),
         "api_count": len(api_hits),
         "corr_count": len(corr),
+        "named_count": len(named),
+        "corr_deltas_us": deltas,
+        "confidences": confs,
         "apis": sorted(set(e.get("api", "") for e in api_hits + random_hits)),
         "random_apis": rand_apis,
+        "algorithms": sorted(set(e.get("algorithm", "") for e in named)),
         "corr_sample": [
             {
                 "api": e.get("api"),
@@ -105,47 +114,73 @@ def score(rows: list[dict], procs: set[str] | None = None) -> dict:
     }
 
 
+def build_workloads():
+    """Return (positives, negatives) as (base_id, cmd, proc_filter, label) tuples.
+
+    proc_filter: a set restricts scoring to those process names; None scores any
+    process; the sentinel "GETRANDOM" restricts to whichever process actually
+    issued getrandom (the original neg_getrandom behaviour).
+    """
+    wl = ROOT / "workloads" / "liboqs" / "mlkem_workload"
+    positives = [
+        ("pos_rsa", ["openssl", "genpkey", "-algorithm", "RSA",
+                     "-pkeyopt", "rsa_keygen_bits:2048", "-out", "/tmp/pos_rsa.pem"],
+         {"openssl"}, "crypto"),
+        ("pos_ec", ["openssl", "genpkey", "-algorithm", "EC",
+                    "-pkeyopt", "ec_paramgen_curve:P-256", "-out", "/tmp/pos_ec.pem"],
+         {"openssl"}, "crypto"),
+        ("pos_x25519", ["openssl", "genpkey", "-algorithm", "X25519",
+                        "-out", "/tmp/pos_x25519.pem"],
+         {"openssl"}, "crypto"),
+    ]
+    if wl.exists():
+        for base, alg in [("pos_mlkem512", "ML-KEM-512"),
+                          ("pos_mlkem768", "ML-KEM-768"),
+                          ("pos_mlkem1024", "ML-KEM-1024")]:
+            positives.append((base, [str(wl), alg], {"mlkem_workload"}, "crypto"))
+    negatives = [
+        ("neg_getrandom",
+         ["python3", "-c", "import os\n[os.getrandom(32) for _ in range(20)]"],
+         "GETRANDOM", "random_only"),
+        ("neg_urandom",
+         ["dd", "if=/dev/urandom", "bs=32", "count=10", "of=/tmp/ur.bin"],
+         None, "random_only"),
+        ("neg_uuid",
+         ["python3", "-c", "import uuid\n[uuid.uuid4() for _ in range(20)]"],
+         None, "random_only"),
+    ]
+    return positives, negatives
+
+
 def main() -> None:
+    # REPEAT (default 1) runs every workload N times; each repeat is a separate
+    # case (id suffixed _r01, _r02, ...) so process-level TP/FP/FN accumulate.
+    repeat = int(os.environ.get("REPEAT", "1"))
+    positives, negatives = build_workloads()
     cases = []
 
-    # Positive: OpenSSL RSA keygen (expects API + likely correlation)
-    print("[+] positive openssl RSA keygen")
-    rows = run_case("pos_rsa", [
-        "openssl", "genpkey", "-algorithm", "RSA",
-        "-pkeyopt", "rsa_keygen_bits:2048", "-out", "/tmp/pos_rsa.pem",
-    ])
-    s = score(rows, {"openssl"})
-    cases.append({"id": "pos_rsa", "label": "crypto", "expected_crypto": True, **s})
-
-    # Positive: ML-KEM via liboqs if available
-    wl = ROOT / "workloads" / "liboqs" / "mlkem_workload"
-    if wl.exists():
-        print("[+] positive liboqs ML-KEM")
-        rows = run_case("pos_mlkem", [str(wl), "ML-KEM-768"])
-        s = score(rows, {"mlkem_workload"})
-        cases.append({"id": "pos_mlkem", "label": "crypto", "expected_crypto": True, **s})
-
-    # Negative: getrandom only
-    print("[-] negative getrandom-only")
-    rows = run_case("neg_getrandom", [
-        "python3", "-c", "import os\n[os.getrandom(32) for _ in range(20)]",
-    ])
-    s = score(rows)  # any process
-    # Filter to python
-    s = score(rows, {e.get("process") for e in rows if e.get("api") == "getrandom"} or None)
-    cases.append({"id": "neg_getrandom", "label": "random_only", "expected_crypto": False, **s})
-
-    # Negative: urandom read (may not hit RAND_bytes uprobe)
-    print("[-] negative /dev/urandom")
-    rows = run_case("neg_urandom", ["dd", "if=/dev/urandom", "bs=32", "count=10", "of=/tmp/ur.bin"])
-    s = score(rows)
-    cases.append({"id": "neg_urandom", "label": "random_only", "expected_crypto": False, **s})
-
-    # Negative: uuid (stdlib)
-    print("[-] negative uuid")
-    rows = run_case("neg_uuid", ["python3", "-c", "import uuid\n[uuid.uuid4() for _ in range(20)]"])
-    s = score(rows)
-    cases.append({"id": "neg_uuid", "label": "random_only", "expected_crypto": False, **s})
+    for rep in range(1, repeat + 1):
+        suf = f"_r{rep:02d}"
+        for base, cmd, procs, label in positives:
+            cid = base + suf
+            print(f"[+] {cid}")
+            rows = run_case(cid, cmd)
+            s = score(rows, procs)
+            cases.append({"id": cid, "workload": base, "label": label,
+                          "expected_crypto": True, **s})
+        for base, cmd, pf, label in negatives:
+            cid = base + suf
+            print(f"[-] {cid}")
+            rows = run_case(cid, cmd)
+            if pf == "GETRANDOM":
+                s = score(rows, {e.get("process") for e in rows
+                                 if e.get("api") == "getrandom"} or None)
+            elif pf is None:
+                s = score(rows)
+            else:
+                s = score(rows, pf)
+            cases.append({"id": cid, "workload": base, "label": label,
+                          "expected_crypto": False, **s})
 
     # Metrics
     def metrics(det_key: str) -> dict:
@@ -166,22 +201,74 @@ def main() -> None:
         f1 = 2 * prec * rec / (prec + rec) if (prec + rec) else 0.0
         return {"TP": tp, "TN": tn, "FP": fp, "FN": fn, "precision": prec, "recall": rec, "f1": f1}
 
+    from statistics import median
+
+    def agg(base: str) -> dict:
+        cs = [c for c in cases if c["workload"] == base]
+        n = len(cs)
+        expected = cs[0]["expected_crypto"]
+        det_key = "D_api" if expected else "D_random"
+        det = sum(1 for c in cs if c[det_key])
+        api_total = sum(c["api_count"] for c in cs)
+        named_total = sum(c["named_count"] for c in cs)
+        anchored = sum(c["corr_count"] for c in cs)
+        deltas = [x for c in cs for x in c.get("corr_deltas_us", [])]
+        confs = [x for c in cs for x in c.get("confidences", [])]
+        return {
+            "workload": base,
+            "label": cs[0]["label"],
+            "repeats": n,
+            "detector": det_key,
+            "detection_rate": det / n if n else 0.0,
+            "api_events_total": api_total,
+            "name_attribution_rate": (named_total / api_total) if api_total else None,
+            "anchor_rate": (anchored / api_total) if api_total else None,
+            "delta_us_median": median(deltas) if deltas else None,
+            "delta_us_max": max(deltas) if deltas else None,
+            "confidence_min": min(confs) if confs else None,
+            "confidence_max": max(confs) if confs else None,
+        }
+
+    order = list(dict.fromkeys(c["workload"] for c in cases))
+    workloads = [agg(b) for b in order]
+
     table = {
+        "repeat": repeat,
         "D_random (random alone)": metrics("D_random"),
         "D_api (crypto API)": metrics("D_api"),
         "D_corr (API + random correlation)": metrics("D_corr"),
+        "workloads": workloads,
         "cases": cases,
     }
     (OUT / "summary.json").write_text(json.dumps(table, indent=2))
 
+    n_proc = len(cases)
     md = ["# Randomness detector evaluation", "",
-          "| Detector | Precision | Recall | F1 | FP | FN |",
-          "|---|---:|---:|---:|---:|---:|"]
-    for name, m in table.items():
-        if name == "cases":
-            continue
+          f"Repeats: {repeat}  |  Processes scored: {n_proc}", "",
+          "| Detector | Precision | Recall | F1 | TP | FP | FN |",
+          "|---|---:|---:|---:|---:|---:|---:|"]
+    for name in ("D_random (random alone)", "D_api (crypto API)",
+                 "D_corr (API + random correlation)"):
+        m = table[name]
         md.append(
-            f"| {name} | {m['precision']:.2f} | {m['recall']:.2f} | {m['f1']:.2f} | {m['FP']} | {m['FN']} |"
+            f"| {name} | {m['precision']:.2f} | {m['recall']:.2f} | {m['f1']:.2f} | "
+            f"{m['TP']} | {m['FP']} | {m['FN']} |"
+        )
+    md += ["", "## Per-workload", "",
+           "| Workload | Label | Reps | Det.rate | Name attr. | Anchor | "
+           "Δt med (μs) | Δt max | Conf |",
+           "|---|---|---:|---:|---:|---:|---:|---:|---:|"]
+    for w in workloads:
+        def pct(x):
+            return "-" if x is None else f"{x*100:.0f}%"
+        conf = "-" if w["confidence_min"] is None else (
+            f"{w['confidence_min']:.1f}-{w['confidence_max']:.1f}")
+        dm = "-" if w["delta_us_median"] is None else f"{w['delta_us_median']:.0f}"
+        dx = "-" if w["delta_us_max"] is None else f"{w['delta_us_max']:.0f}"
+        md.append(
+            f"| {w['workload']} | {w['label']} | {w['repeats']} | "
+            f"{w['detection_rate']*100:.0f}% | {pct(w['name_attribution_rate'])} | "
+            f"{pct(w['anchor_rate'])} | {dm} | {dx} | {conf} |"
         )
     md += ["", "## Per-case", "",
            "| Case | Label | D_random | D_api | D_corr | APIs |",
